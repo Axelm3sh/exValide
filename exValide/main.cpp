@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include <stdio.h>
+#include "Timer.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -14,6 +15,9 @@ bool loadMedia();
 
 //frees media and shut down SDL
 void close();
+
+//Test function that runs timer class
+void DEBUG_TIMER();
 
 //GLOBAL VAR
 /**FIXME testing purpose, remove global vars and move into class**/
@@ -32,34 +36,11 @@ SDL_Surface* gHelloWorld = NULL;
 //START MAIN
 int main(int argc, char **argv)
 {
-	//Start up SDL and create window
-	if (!init())
-	{
-		printf("Failed to initialize!\n");
-	}
-	else
-	{
-		//Load media
-		if (!loadMedia())
-		{
-			printf("Failed to load media!\n");
-		}
-		else
-		{
-			//Apply the image
-			SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
-			//Update the surface
-			SDL_UpdateWindowSurface(gWindow);
-			//Wait two seconds
-			SDL_Delay(2000);
-		}
-	}
+	
+	//Initialize main test and timer test
+	DEBUG_TIMER();
 
-	//Free resources and close SDL
-	close();
-
-
-	return 0;
+	return 0; //Test main should have ran for 6 seconds total
 }
 
 bool init()
@@ -120,4 +101,58 @@ void close()
 
 	//Quit SDL subsystems
 	SDL_Quit();
+}
+
+
+void DEBUG_TIMER()
+{
+	Timer gTime;
+	printf("initial Time %f\n", gTime.GetElapsed());
+
+	//Start up SDL and create window
+	if (!init())
+	{
+		printf("Failed to initialize!\n");
+	}
+	else
+	{
+		//Load media
+		if (!loadMedia())
+		{
+			printf("Failed to load media!\n");
+		}
+		else
+		{
+			//Apply the image
+			SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
+			//Update the surface
+			SDL_UpdateWindowSurface(gWindow);
+			//Wait two seconds
+			SDL_Delay(2000);
+		}
+	}
+
+
+	gTime.Update();
+	printf("Seconds Passed: %f\n", gTime.GetElapsed());
+	SDL_Delay(1000);
+
+	gTime.Update(); //clear last delay
+	float totalTimeAccum = 0.0f;
+	float totalFrames = 0;
+	while (totalTimeAccum < 1.00f) //over 1 second
+	{
+
+		gTime.Update();
+		totalFrames++; //Add frame
+		totalTimeAccum += gTime.GetElapsed();
+		printf("Tick(ms): %f\n", gTime.GetElapsed());
+
+	}
+	printf("FPS: %f\n", totalFrames);
+
+	SDL_Delay(2000);
+
+	//Free resources and close SDL
+	close();
 }
