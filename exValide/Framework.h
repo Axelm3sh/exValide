@@ -18,6 +18,8 @@ private:
 	SDL_Window* gWindow;
 	SDL_Surface* gWindowSurface;
 
+	bool bIsRunning;
+
 
 public:
 	CFramework();
@@ -31,7 +33,8 @@ public:
 	// Update function, could call multiple update functions from other classes
 	void Update();
 
-	//
+	//Run function
+	void Run();
 
 
 

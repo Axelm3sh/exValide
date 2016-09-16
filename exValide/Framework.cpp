@@ -4,11 +4,12 @@ CFramework::CFramework()
 {
 	gWindow = NULL;
 	gWindowSurface = NULL;
+	bIsRunning = false;
 }
 
 CFramework::CFramework(int w, int h)
 {
-	Init(w, h);
+	bIsRunning = Init(w, h); //Initialize engine and set loop bool to true if non-default construct
 }
 
 CFramework::~CFramework()
@@ -82,6 +83,17 @@ void CFramework::Update()
 		Enemy->Update
 		UI->Update
 	*/
+}
+
+void CFramework::Run() //Run game instance
+{
+	if (bIsRunning) // we initialized successfully
+	{
+		while (bIsRunning)
+		{
+			Update();
+		}
+	}
 }
 
 
