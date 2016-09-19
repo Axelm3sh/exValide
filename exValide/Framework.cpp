@@ -81,6 +81,16 @@ void CFramework::Quit()
 	SDL_Quit();
 }
 
+void CFramework::Refresh()
+{
+	SDL_RenderPresent(gWindowRenderer);
+}
+
+void CFramework::Clear()
+{
+	SDL_RenderClear(gWindowRenderer);
+}
+
 
 //Return the pointer to the renderer, should point textures and surfaces here
 SDL_Renderer* CFramework::getRenderer()

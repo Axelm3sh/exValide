@@ -28,6 +28,11 @@ public:
 	// Stops Engine Processes, should be the last function called before exiting out of program
 	void Quit();
 
+	//Render textures
+	void Refresh(); //Wrapper SDL_RenderPresent(gWindowRenderer);
+	//Clear screen
+	void Clear();	//Wrapper SDL_RenderClear(gWindowRenderer);
+	//void QueueTexture(); //Pushes texture to renderer, when refresh is called update all at once?
 
 	//returns the renderer
 	SDL_Renderer* getRenderer();
