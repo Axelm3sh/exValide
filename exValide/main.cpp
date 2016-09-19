@@ -16,8 +16,17 @@ int main(int argc, char **argv)
 	//DEBUG_TIMER(); //In Test01_loadTimer.cpp Todo: Delete me
 
 
-	//CFramework Test_Framework(SCREEN_WIDTH, SCREEN_HEIGHT);
+	CFramework Test_Framework(SCREEN_WIDTH, SCREEN_HEIGHT);
 
+	SDL_Window* ptrWin;
+	ptrWin = Test_Framework.getWindow();
+
+	if (ptrWin)
+	{
+		std::cout << SDL_GetWindowTitle(ptrWin);
+	}
+
+	SDL_Delay(4000);
 
 	return 0; //Test main should have ran for 6 seconds total
 }

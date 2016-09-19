@@ -13,13 +13,8 @@
 class CFramework
 {
 private: 
-	Timer gTimer; //intializes when this class is also initialized;
-
-	SDL_Window* gWindow;
-	SDL_Surface* gWindowSurface;
-
-	bool bIsRunning;
-
+	SDL_Window* gWindow; //This is the main window that displays surfaces/textures/etc..
+	SDL_Renderer* gWindowRenderer; //This is the renderer for the window
 
 public:
 	CFramework();
@@ -30,15 +25,11 @@ public:
 	bool Init(int screenWidth, int screenHeight);
 	// Stops Engine Processes, should be the last function called before exiting out of program
 	void Quit();
-	// Update function, could call multiple update functions from other classes
-	void Update();
-
-	//Run function
-	void Run();
 
 
-
-	// //returns pointer to the window to draw stuff on
+	//returns the renderer
+	SDL_Renderer* getRenderer();
+	//returns pointer to the window to draw stuff on
 	SDL_Window* getWindow();
 };
 

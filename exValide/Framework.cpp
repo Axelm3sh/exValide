@@ -3,13 +3,12 @@
 CFramework::CFramework()
 {
 	gWindow = NULL;
-	gWindowSurface = NULL;
-	bIsRunning = false;
+	gWindowRenderer = NULL;
 }
 
 CFramework::CFramework(int w, int h)
 {
-	bIsRunning = Init(w, h); //Initialize engine and set loop bool to true if non-default construct
+	Init(w, h); //Initialize engine and set loop bool to true if non-default construct
 }
 
 CFramework::~CFramework()
@@ -42,14 +41,24 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 		}
 		else
 		{
-			//Get window surface
-			gWindowSurface = SDL_GetWindowSurface(gWindow);
+			//Create renderer for window
+			gWindowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+			if (gWindowRenderer == NULL)
+			{
+				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+				success = false;
+			}
+			else
+			{
+
+				//Get clear screen and update window with renderer
+				SDL_SetRenderDrawColor(gWindowRenderer, 100, 0, 0, 255);
+				SDL_RenderClear(gWindowRenderer);
+
+				SDL_RenderPresent(gWindowRenderer);
+			}
 		}
 	}
-
-	//Should probably load world background here
-
-	//Should probably initialize player here
 
 	return success;
 
@@ -58,9 +67,9 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 // Stops Engine Processes, should be the last function called before exiting out of program
 void CFramework::Quit()
 {
-	//Deallocate surface
-	SDL_FreeSurface(gWindowSurface);
-	gWindowSurface = NULL;
+	//Destroy Renderer
+	SDL_DestroyRenderer(gWindowRenderer);
+	gWindowRenderer = NULL;
 
 	//Destroy window
 	SDL_DestroyWindow(gWindow);
@@ -71,34 +80,12 @@ void CFramework::Quit()
 }
 
 
-// This function will update/refresh the window
-void CFramework::Update()
+SDL_Renderer* CFramework::getRenderer()
 {
-	//Do stuff per update Call
-	gTimer.Update(); //Update Framework Timer
-
-	/*If we split calls into several steps we can divide it up as
-		World->Update
-		Player->Update
-		Enemy->Update
-		UI->Update
-	*/
+	return gWindowRenderer;
 }
 
-void CFramework::Run() //Run game instance
-{
-	if (bIsRunning) // we initialized successfully
-	{
-		while (bIsRunning)
-		{
-			Update();
-		}
-	}
-}
-
-
-
-// //returns pointer to the window to draw stuff on
+//returns pointer to the window to draw stuff on
 SDL_Window* CFramework::getWindow()
 {
 	return gWindow;
