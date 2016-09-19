@@ -1,123 +1,103 @@
 #include "SDL.h"
 #include <stdio.h>
+#include "Timer.h"
+#include "Framework.h"
 
-//Screen dimension constants
+//Screen dimension constants, can be changed down line
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
-
-//FUNCTIONS
-//start SDL and create window
-bool init();
-
-//load media
-bool loadMedia();
-
-//frees media and shut down SDL
-void close();
-
-//GLOBAL VAR
-/**FIXME testing purpose, remove global vars and move into class**/
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-
-/**FIXME testing purpose, remove global vars and move into class**/
-//The surface contained by the window
-SDL_Surface* gScreenSurface = NULL;
-
-/**FIXME testing purpose, remove global vars and move into class**/
-//The image we will load and show on the screen
-SDL_Surface* gHelloWorld = NULL;
 
 
 //START MAIN
 int main(int argc, char **argv)
 {
-	//Start up SDL and create window
-	if (!init())
+	
+	//Initialize main test and timer test
+	//DEBUG_TIMER(); //In Test01_loadTimer.cpp Todo: Delete me
+
+
+	CFramework Test_Framework(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	SDL_Window* ptrWin;
+	ptrWin = Test_Framework.getWindow();
+
+	if (ptrWin)
 	{
-		printf("Failed to initialize!\n");
-	}
-	else
-	{
-		//Load media
-		if (!loadMedia())
-		{
-			printf("Failed to load media!\n");
-		}
-		else
-		{
-			//Apply the image
-			SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
-			//Update the surface
-			SDL_UpdateWindowSurface(gWindow);
-			//Wait two seconds
-			SDL_Delay(2000);
-		}
+		std::cout << SDL_GetWindowTitle(ptrWin);
+
+		SDL_Delay(1000);
+		SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 0, 100, 100, 255); //External color call
+		SDL_RenderClear(Test_Framework.getRenderer());
+		SDL_RenderPresent(Test_Framework.getRenderer());
 	}
 
-	//Free resources and close SDL
-	close();
+	SDL_Delay(4000);
+
+	std::cout << "\nInitialze Protocall success, moving to Event Drive\n";
+
+	/*************Should move below code to a class?********************/
+	//Event handler
+	SDL_Event e;
+	Timer delta;
+	float accumulator = 0.0;
+	bool quit = false;
+
+	while (!quit) //while application is running
+	{
+		delta.Update(); //Update timer
+
+		accumulator += delta.GetElapsed(); //Accumulate time
+
+		//Handle Events on queue, update colors if user does anything input wise(mouse movement included)
+		while (SDL_PollEvent(&e) != 0)
+		{
+			delta.Update();
+			accumulator += delta.GetElapsed(); //Accumulate time
+
+			//User request quit by escape key or by exiting window
+			if (e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN)) 
+			{
+				quit = true;
+			}
+
+			//Check acc status
+			if (accumulator < 1.f)
+			{
+				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 0, 100, 100, 255); //External color call
+				printf("R0 G100 B100 A255\n");
+			}
+			else if (accumulator < 2.f)
+			{
+				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 155, 0, 50, 255); //External color call
+				printf("R155 G0 B50 A255\n");
+			}
+			else if (accumulator < 3.f)
+			{
+				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 50, 255, 100, 255); //External color call
+				printf("R50 G255 B100 A255\n");
+			}
+			else if (accumulator < 4.f)
+			{
+				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 255, 100, 25, 255); //External color call
+				printf("R255 G100 B25 A255\n");
+			}
+			else
+			{
+				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 255, 255, 255, 255); //External color call
+				printf("WHITE\n");
+			}
+
+			SDL_RenderClear(Test_Framework.getRenderer()); //Clear 
+			SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
+		}
+
+		if (accumulator > 6)
+		{
+			accumulator = 0.0f;
+		}
+	}
 
 
-	return 0;
+	return 0; //Test main should have ran for 6 seconds total
 }
 
-bool init()
-{
-	//Initialization flag
-	bool success = true;
-
-	//Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-		success = false;
-	}
-	else
-	{
-		//Create window
-		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (gWindow == NULL)
-		{
-			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-			success = false;
-		}
-		else
-		{
-			//Get window surface
-			gScreenSurface = SDL_GetWindowSurface(gWindow);
-		}
-	}
-
-	return success;
-}
-
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
-
-	//Load splash image
-	gHelloWorld = SDL_LoadBMP("hello_world.bmp");
-	if (gHelloWorld == NULL)
-	{
-		printf("Unable to load image %s! SDL Error: %s\n", "hello_world.bmp", SDL_GetError());
-		success = false;
-	}
-
-	return success;
-}
-
-void close()
-{
-	//Deallocate surface
-	SDL_FreeSurface(gHelloWorld);
-	gHelloWorld = NULL;
-
-	//Destroy window
-	SDL_DestroyWindow(gWindow);
-	gWindow = NULL;
-
-	//Quit SDL subsystems
-	SDL_Quit();
-}
