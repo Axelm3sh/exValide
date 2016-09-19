@@ -16,6 +16,8 @@ private:
 	SDL_Window* gWindow; //This is the main window that displays surfaces/textures/etc..
 	SDL_Renderer* gWindowRenderer; //This is the renderer for the window
 
+	bool bFrameworkIsRunning;
+
 public:
 	CFramework();
 	CFramework(int w, int h);

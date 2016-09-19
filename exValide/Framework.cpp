@@ -32,7 +32,7 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 	else
 	{
 		//Create window with screenWidth and screenHeight
-		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+		gWindow = SDL_CreateWindow("exValide Build x.xx", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 									screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
@@ -50,16 +50,18 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 			}
 			else
 			{
-
 				//Get clear screen and update window with renderer
-				SDL_SetRenderDrawColor(gWindowRenderer, 100, 0, 0, 255);
+				SDL_SetRenderDrawColor(gWindowRenderer, 100, 0, 0, 255); //dark red window
 				SDL_RenderClear(gWindowRenderer);
 
-				SDL_RenderPresent(gWindowRenderer);
-			}
-		}
-	}
+				SDL_RenderPresent(gWindowRenderer); //render nothing~!
+			}//gWindowRenderer
 
+		}//gWindow
+
+	}//SDL_INIT_EVERYTHING
+
+	bFrameworkIsRunning = success;
 	return success;
 
 }
@@ -80,6 +82,7 @@ void CFramework::Quit()
 }
 
 
+//Return the pointer to the renderer, should point textures and surfaces here
 SDL_Renderer* CFramework::getRenderer()
 {
 	return gWindowRenderer;
