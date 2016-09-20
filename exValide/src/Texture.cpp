@@ -8,12 +8,30 @@ Texture::Texture()
 	mWidth = 0;
 
 	mTexture = NULL;
+	RenderTo = NULL;
 }
 
 
 Texture::~Texture()
 {
 	free();
+}
+
+SDL_Texture * Texture::LoadTexture(std::string path)
+{
+	SDL_Texture* newTexture = NULL;
+
+	SDL_Surface* loadedSurfacePixel = IMG_Load(path.c_str());
+	if (loadedSurfacePixel == NULL)
+	{
+		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+	}
+	else
+	{
+
+	}
+
+	return nullptr;
 }
 
 bool Texture::LoadFromFile(std::string path)

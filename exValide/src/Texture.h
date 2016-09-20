@@ -15,6 +15,8 @@ public:
 	Texture();
 	~Texture();
 
+	SDL_Texture* LoadTexture(std::string path);
+
 	//loads image from specified path
 	bool LoadFromFile(std::string path);
 
@@ -50,6 +52,9 @@ private:
 
 	int mHeight; //Height of image
 	int mWidth; //Width of image
+
+	//Render to apply to
+	SDL_Renderer* RenderTo; //Todo code functions to set it
 };
 
 #endif
