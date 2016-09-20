@@ -1,4 +1,4 @@
-#include "GlobalDefinition.h"
+#include "GlobalDefinitions.h"
 
 #ifndef TIMER_H
 #define TIMER_H

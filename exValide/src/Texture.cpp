@@ -28,7 +28,7 @@ SDL_Texture * Texture::LoadTexture(std::string path)
 	}
 	else
 	{
-
+		//Todo finish
 	}
 
 	return nullptr;
