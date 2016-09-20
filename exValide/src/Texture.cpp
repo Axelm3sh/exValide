@@ -29,15 +29,32 @@ SDL_Texture * Texture::LoadTexture(std::string path)
 	else
 	{
 		//Todo finish
+		newTexture = SDL_CreateTextureFromSurface(RenderTo, loadedSurfacePixel);
+
+		if (newTexture == NULL)
+		{
+			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+		}
+
+		//Free's up old surface
+		SDL_FreeSurface(loadedSurfacePixel);
 	}
 
-	return nullptr;
+	return newTexture;
 }
 
 bool Texture::LoadFromFile(std::string path)
 {
+	mTexture = LoadTexture(path); //Return Texture
 
-	return false;
+	if (mTexture != NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Texture::LoadFromText(std::string text, SDL_Color textColor)
