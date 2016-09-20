@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Timer.h"
 #include "SDL.h"
+#include "SDL_ttf.h"
+#include "SDL_image.h"
 
 
 /*This class should act as a container that holds multiple classes. 

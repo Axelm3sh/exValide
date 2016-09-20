@@ -18,6 +18,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Framework.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Framework.h" />
+    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\hello_world.bmp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{197E9991-DD07-46E9-8B4F-09BDE785A16C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -74,8 +88,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\SDL2;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\SDL2\libs\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)exValide\SDL2;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)exValide\SDL2\libs\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -105,13 +119,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)exValide\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SDL2\libs\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)SDL2\libs\x64\SDL2main.lib;$(SolutionDir)SDL2\libs\x64\SDL2.lib;$(SolutionDir)SDL2\libs\x64\SDL2_image.lib;$(SolutionDir)SDL2\libs\x64\SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)exValide\SDL2\libs\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)exValide\SDL2\libs\x64\SDL2main.lib;$(SolutionDir)exValide\SDL2\libs\x64\SDL2.lib;$(SolutionDir)exValide\SDL2\libs\x64\SDL2_image.lib;$(SolutionDir)exValide\SDL2\libs\x64\SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,20 +164,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Framework.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Timer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="hello_world.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Timer.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

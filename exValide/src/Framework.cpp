@@ -31,6 +31,21 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 	}
 	else
 	{
+		//Initialize PNG loading
+		int imgFlags = IMG_INIT_PNG;
+		if (!(IMG_Init(imgFlags) & imgFlags))
+		{
+			printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+			success = false;
+		}
+
+		//Initialize SDL_ttf
+		if (TTF_Init() == -1)
+		{
+			printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+			success = false;
+		}
+
 		//Create window with screenWidth and screenHeight
 		gWindow = SDL_CreateWindow("exValide Build x.xx", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 									screenWidth, screenHeight, SDL_WINDOW_SHOWN);
@@ -78,6 +93,8 @@ void CFramework::Quit()
 	gWindow = NULL;
 
 	//Quit SDL subsystems
+	TTF_Quit();
+	IMG_Quit();
 	SDL_Quit();
 }
 
