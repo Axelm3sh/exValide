@@ -2,7 +2,7 @@
 #define TEXTURE_H
 
 #include <iostream>
-#include "GlobalDefinitions.h"
+#include "GDefinitions.h"
 
 //Wrapper class that does texture related things for you
 class Texture

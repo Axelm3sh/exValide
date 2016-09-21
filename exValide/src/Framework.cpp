@@ -98,6 +98,7 @@ void CFramework::Quit()
 	SDL_Quit();
 }
 
+
 void CFramework::Refresh()
 {
 	SDL_RenderPresent(gWindowRenderer);
