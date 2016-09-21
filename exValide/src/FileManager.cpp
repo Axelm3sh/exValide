@@ -14,13 +14,13 @@ FileManager::~FileManager()
 
 void FileManager::BeginParse()
 {
-	fstream parseFile(resFile);
+	fstream parseFile;
 	string readLine;
 	string tag;
 	string path;
 	
 
-	//parseFile.open;
+	parseFile.open(resFile);
 
 	//Check to see if stream is opened
 	if (parseFile.is_open())
@@ -36,20 +36,34 @@ void FileManager::BeginParse()
 			rangeStart = readLine.find_first_of('\"');
 			if (rangeStart != -1)
 			{
+				rangeEnd = readLine.find_last_of('\"') -1;
 
+				tag.append(readLine, rangeStart+1, (rangeEnd - rangeStart));
+				cout << tag << "\n"; //Debug
+				
 			}
-			//If #
-			
-				//Ignore The # symbols in text and treat entirety of what follows as comments
-				//clear buffer in case?
-			//Else if \" char
-				//Put all following characters into variable tag until next \" is read, signifies end of tag
-				//Continue to read till we hit another character 
-				//signifies path name, put following characters into variable path until reach \n char
-				//Pair map <tag, name> into resMap
-				//clear buffer?			
+
+			rangeStart = readLine.find_first_of('$');
+			if (rangeStart != -1)
+			{
+				rangeEnd = readLine.size();
+
+				path.append(readLine, rangeStart+1, (rangeEnd - rangeStart));
+				cout << path << "\n"; //debug
+			}
+	
+			if (!tag.empty() || !path.empty())
+			{
+				MapNamePaths[tag] = path; //plzwork
+			}
+
+			tag.clear();
+			path.clear();
+			readLine.clear();
 		}
 	}
+
+	parseFile.close();
 }
 
 string FileManager::findFileByNameTag(string tag)

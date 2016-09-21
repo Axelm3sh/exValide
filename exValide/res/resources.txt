@@ -1,9 +1,9 @@
 #Players
-"PlayerSS" Players_SpriteSheet.png
+"PlayerSS" $Players_SpriteSheet.png
 
 #Background
-"Backdrop" background/BG_Backdrops.png
-"Tiles" background/BG_Tiles_And_Masks.png
+"Backdrop" $background/BG_Backdrops.png
+"Tiles" $background/BG_Tiles_And_Masks.png
 
 #Dev
-"helloWorld" hello_world.bmp
+"helloWorld" $hello_world.bmp

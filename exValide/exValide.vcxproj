@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="src\FileManager.cpp" />
     <ClCompile Include="src\Framework.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileManager.h" />
+    <ClInclude Include="src\FileManager.h" />
     <ClInclude Include="src\GDefinitions.h" />
     <ClInclude Include="src\Framework.h" />
     <ClInclude Include="src\Texture.h" />

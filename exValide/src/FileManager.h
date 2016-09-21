@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <fstream>
 #include <map>
-#include "src/GDefinitions.h"
+#include "GDefinitions.h"
 
 using namespace std;
 
@@ -30,7 +30,7 @@ public:
 	string findFileByNameTag(string tag);
 
 private:
-	map<string, string> objNamePaths;
+	map<string, string> MapNamePaths;
 };
 
 

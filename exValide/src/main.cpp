@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Timer.h"
 #include "Framework.h"
+#include "FileManager.h"
 
 //Screen dimension constants, can be changed down line
 const int SCREEN_WIDTH = 640;
@@ -23,13 +24,19 @@ int main(int argc, char **argv)
 
 	if (ptrWin)
 	{
-		std::cout << SDL_GetWindowTitle(ptrWin);
+		std::cout << SDL_GetWindowTitle(ptrWin) << "\n";
 
 		SDL_Delay(1000);
 		SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 0, 100, 100, 255); //External color call
 		SDL_RenderClear(Test_Framework.getRenderer());
 		SDL_RenderPresent(Test_Framework.getRenderer());
 	}
+
+	SDL_Delay(4000);
+
+	FileManager FM;
+
+	std::cout << "Post-Init File Manager\n";
 
 	SDL_Delay(4000);
 
