@@ -3,6 +3,7 @@
 #include "Timer.h"
 #include "Framework.h"
 #include "FileManager.h"
+#include "Texture.h"
 
 //Screen dimension constants, can be changed down line
 const int SCREEN_WIDTH = 640;
@@ -34,7 +35,10 @@ int main(int argc, char **argv)
 
 	SDL_Delay(4000);
 
+	//*****************FileManager*******************
 	FileManager FM;
+
+	Texture texture;
 
 	std::cout << "Post-Init File Manager\n";
 
@@ -48,6 +52,8 @@ int main(int argc, char **argv)
 	Timer delta;
 	float accumulator = 0.0;
 	bool quit = false;
+
+	
 
 	while (!quit) //while application is running
 	{
@@ -72,6 +78,7 @@ int main(int argc, char **argv)
 			{
 				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 0, 100, 100, 255); //External color call
 				printf("R0 G100 B100 A255\n");
+				
 			}
 			else if (accumulator < 2.f)
 			{
