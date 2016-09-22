@@ -91,11 +91,13 @@ int main(int argc, char **argv)
 			{
 				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 155, 0, 50, 255); //External color call
 				printf("R155 G0 B50 A255\n");
+
 			}
 			else if (accumulator < 3.f)
 			{
 				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 50, 255, 100, 255); //External color call
 				printf("R50 G255 B100 A255\n");
+
 			}
 			else if (accumulator < 4.f)
 			{
@@ -107,14 +109,20 @@ int main(int argc, char **argv)
 			{
 				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 255, 255, 255, 255); //External color call
 				printf("WHITE\n");
+				
 			}
 
-			//Call AFTER RenderClear or else you'll lose this 
+			//Call AFTER RenderClear or else you'll lose this texture
 			//50 units right, 50 units down, No Clipping, +45 degree rotation, No center offset?, No Flip
 			texture.render(50, 50, NULL, 45.0, NULL); //FIXME test debug 
-
 			SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
 		}
+
+		//Outerloop test
+		SDL_RenderClear(Test_Framework.getRenderer());
+		texture.render(100, 100, NULL, (accumulator*60.0), NULL); //FIXME test debug 
+		SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
+
 
 		if (accumulator > 6)
 		{
