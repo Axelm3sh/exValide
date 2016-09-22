@@ -40,6 +40,12 @@ int main(int argc, char **argv)
 
 	Texture texture;
 
+	//*****IMPORTANT THAT TEXTURE NEEDS A SET RENDERER****
+	texture.setRenderTo(Test_Framework.getRenderer()); //Set up our target to render to
+	texture.LoadFromFile(FM.findFileByNameTag("helloWorld"));//Loaded up texture, now stored in this class
+	
+	
+
 	std::cout << "Post-Init File Manager\n";
 
 	SDL_Delay(4000);
@@ -73,6 +79,7 @@ int main(int argc, char **argv)
 				quit = true;
 			}
 
+			SDL_RenderClear(Test_Framework.getRenderer()); //Clear 
 			//Check acc status
 			if (accumulator < 1.f)
 			{
@@ -94,6 +101,7 @@ int main(int argc, char **argv)
 			{
 				SDL_SetRenderDrawColor(Test_Framework.getRenderer(), 255, 100, 25, 255); //External color call
 				printf("R255 G100 B25 A255\n");
+
 			}
 			else
 			{
@@ -101,7 +109,10 @@ int main(int argc, char **argv)
 				printf("WHITE\n");
 			}
 
-			SDL_RenderClear(Test_Framework.getRenderer()); //Clear 
+			//Call AFTER RenderClear or else you'll lose this 
+			//50 units right, 50 units down, No Clipping, +45 degree rotation, No center offset?, No Flip
+			texture.render(50, 50, NULL, 45.0, NULL); //FIXME test debug 
+
 			SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
 		}
 

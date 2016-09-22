@@ -11,9 +11,12 @@ public:
 	Texture();
 	~Texture();
 
+	//CALL THIS FIRST OR ELSE TEXTURE WILL NOT RENDER AT ALL
+	void setRenderTo(SDL_Renderer* reference);
+
 	SDL_Texture* LoadTexture(std::string path);
 
-	//loads image from specified path
+	//loads image from specified path, DO NOT USE IF RENDERER IS NOT SET
 	bool LoadFromFile(std::string path);
 
 	bool LoadFromText(std::string text, SDL_Color textColor);
