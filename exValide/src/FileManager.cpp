@@ -15,9 +15,9 @@ FileManager::~FileManager()
 void FileManager::BeginParse()
 {
 	fstream parseFile;
-	string readLine;
-	string tag;
-	string path;
+	string readLine = "";
+	string tag = "";
+	string path = "";
 	
 
 	parseFile.open(resFile);
@@ -54,6 +54,8 @@ void FileManager::BeginParse()
 
 				path.append(readLine, rangeStart+1, (rangeEnd - rangeStart));
 				//Fixme: someone add a check for string whitespace (ie: trailing whitespace)
+
+				path.insert(0, "res/");
 
 				cout << path << "\n"; //debug
 			}

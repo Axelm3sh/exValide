@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	//DEBUG_TIMER(); //In Test01_loadTimer.cpp Todo: Delete me
 
 
-	CFramework Test_Framework(SCREEN_WIDTH, SCREEN_HEIGHT);
+	CFramework Test_Framework(SCREEN_WIDTH, SCREEN_HEIGHT); //Renderer
 
 	SDL_Window* ptrWin;
 	ptrWin = Test_Framework.getWindow();
@@ -43,8 +43,8 @@ int main(int argc, char **argv)
 
 	//*****IMPORTANT THAT TEXTURE NEEDS A SET RENDERER****
 	texture.setRenderTo(Test_Framework.getRenderer()); //Set up our target to render to
-	texture.LoadFromFile(FM.findFileByNameTag("spinlol"));//Loaded up texture, now stored in this class
-	
+	//texture.LoadFromFile(FM.findFileByNameTag("spinlol"));//Loaded up texture, now stored in this class FIXME TEsT
+	texture.LoadFromText("A quick brown fox jumped over the old mcdonald", CBlack);
 	
 
 	std::cout << "Post-Init File Manager\n";
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 				quit = true;
 			}
 
-			SDL_RenderClear(Test_Framework.getRenderer()); //Clear 
+			Test_Framework.Clear(); //Clear screen
 			//Check acc status
 			if (accumulator < 1.f)
 			{
@@ -120,9 +120,9 @@ int main(int argc, char **argv)
 		}
 
 		//Outerloop test
-		SDL_RenderClear(Test_Framework.getRenderer());
+		Test_Framework.Clear(); //clear screen
 		texture.render(20, 20, NULL, (accumulator*60.0), NULL); //FIXME test debug 
-		SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
+		Test_Framework.Refresh(); //Update screen
 
 
 		if (accumulator > 6)

@@ -36,6 +36,7 @@ public:
 	void Clear();	//Wrapper SDL_RenderClear(gWindowRenderer);
 	//void QueueTexture(); //Pushes texture to renderer, when refresh is called update all at once?
 
+
 	//returns the renderer
 	SDL_Renderer* getRenderer();
 	//returns pointer to the window to draw stuff on

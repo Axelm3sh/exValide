@@ -1,10 +1,13 @@
-#Players
+#Players - player sprite sheets
 "PlayerSS" $Players_SpriteSheet.png
 
-#Background
+#Background - backgrounds and tiles
 "Backdrop" $background/BG_Backdrops.png
 "Tiles" $background/BG_Tiles_And_Masks.png
 
-#Dev
+#Dev - developer images
 "helloWorld" $hello_world.bmp
 "spinlol" $spinny.jpg
+
+#FontsDefault - fonts
+"VCR_MONO" $fonts/VCR_OSD_MONO_1.001.ttf

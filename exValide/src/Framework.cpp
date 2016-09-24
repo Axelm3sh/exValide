@@ -32,10 +32,10 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 	else
 	{
 		//Initialize PNG loading
-		int imgFlags = IMG_INIT_PNG;
+		int imgFlags = IMG_INIT_PNG|IMG_INIT_JPG|IMG_INIT_TIF;
 		if (!(IMG_Init(imgFlags) & imgFlags))
 		{
-			printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+			printf("SDL_image could not initialize PNG|JPG|TIF support! SDL_image Error: %s\n", IMG_GetError());
 			success = false;
 		}
 

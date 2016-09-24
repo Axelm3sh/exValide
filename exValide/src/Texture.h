@@ -19,7 +19,8 @@ public:
 	//loads image from specified path, DO NOT USE IF RENDERER IS NOT SET
 	bool LoadFromFile(std::string path);
 
-	bool LoadFromText(std::string text, SDL_Color textColor);
+	//Makes texture from a text string, you can override last 2 parameters for different font size or font file
+	bool LoadFromText(std::string text, SDL_Color textColor, int textSize = 28, std::string pathToTFF = "res/fonts/VCR_OSD_MONO_1.001.ttf");
 
 	//Deallocates Texture
 	void free();
@@ -48,6 +49,9 @@ private:
 
 	//Actual hardware texture
 	SDL_Texture* mTexture;
+
+	//Font to use for this texture
+	TTF_Font* mFont;
 
 	int mHeight; //Height of image
 	int mWidth; //Width of image
