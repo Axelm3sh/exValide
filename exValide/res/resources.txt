@@ -7,3 +7,4 @@
 
 #Dev
 "helloWorld" $hello_world.bmp
+"spinlol" $spinny.jpg

@@ -6,9 +6,10 @@
 #include "Texture.h"
 
 //Screen dimension constants, can be changed down line
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
+const int SCREEN_WIDTH_SD = 640;
+const int SCREEN_HEIGHT_SD = 480;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
 
 //START MAIN
 int main(int argc, char **argv)
@@ -42,7 +43,7 @@ int main(int argc, char **argv)
 
 	//*****IMPORTANT THAT TEXTURE NEEDS A SET RENDERER****
 	texture.setRenderTo(Test_Framework.getRenderer()); //Set up our target to render to
-	texture.LoadFromFile(FM.findFileByNameTag("helloWorld"));//Loaded up texture, now stored in this class
+	texture.LoadFromFile(FM.findFileByNameTag("spinlol"));//Loaded up texture, now stored in this class
 	
 	
 
@@ -114,13 +115,13 @@ int main(int argc, char **argv)
 
 			//Call AFTER RenderClear or else you'll lose this texture
 			//50 units right, 50 units down, No Clipping, +45 degree rotation, No center offset?, No Flip
-			texture.render(50, 50, NULL, 45.0, NULL); //FIXME test debug 
-			SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
+			//texture.render(50, 50, NULL, 45.0, NULL); //FIXME test debug 
+			//SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
 		}
 
 		//Outerloop test
 		SDL_RenderClear(Test_Framework.getRenderer());
-		texture.render(100, 100, NULL, (accumulator*60.0), NULL); //FIXME test debug 
+		texture.render(20, 20, NULL, (accumulator*60.0), NULL); //FIXME test debug 
 		SDL_RenderPresent(Test_Framework.getRenderer()); //Push to renderer
 
 
