@@ -1,5 +1,6 @@
 # exValide
 SDL2 side project, let's make a game engine~ (and maybe a game)
+SDL2: https://www.libsdl.org
 
 ## Intro:
 Using SDL2, we shall recreate a 2D top-down sprite based RPG.  
