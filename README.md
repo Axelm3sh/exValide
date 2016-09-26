@@ -36,6 +36,6 @@ By nature a game engine must require a main game loop in which the execution wil
 >  + Enemies to fight  
 >  + Items and loot drop  
   
-  
-  
-  
+## Future Goals (May or may not be implemented but nice to have)  
+> + Implement a scripting system for super moddability to add objects
+> + Implement world editor of some sort, allows for editing tile maps?
