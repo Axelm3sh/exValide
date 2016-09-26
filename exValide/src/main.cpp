@@ -66,13 +66,13 @@ int main(int argc, char **argv)
 	{
 		delta.Update(); //Update timer
 
-		accumulator += delta.GetElapsed(); //Accumulate time
+		accumulator += delta.GetElapsedFromLastUpdate(); //Accumulate time
 
 		//Handle Events on queue, update colors if user does anything input wise(mouse movement included)
 		while (SDL_PollEvent(&e) != 0)
 		{
 			delta.Update();
-			accumulator += delta.GetElapsed(); //Accumulate time
+			accumulator += delta.GetElapsedFromLastUpdate(); //Accumulate time
 
 			//User request quit by escape key or by exiting window
 			if (e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN)) 
