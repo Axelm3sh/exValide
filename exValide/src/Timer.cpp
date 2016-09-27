@@ -2,11 +2,8 @@
 
 Timer::Timer()
 {
-	//Initialize variables
-	fElapsedTime = 0.0f;
-	fCurrentTime = 0.0f;
-
-	//fLastTime = SDL_GetTicks() / 1000.0f ;
+	fStartTime = 0.0f;
+	fPausedTime = 0.0f;
 
 	bIsPaused = false;
 	bIsStarted = false;
@@ -21,7 +18,11 @@ Timer::Timer(bool init)
 	}
 	else
 	{
+		fStartTime = 0.0f;
+		fPausedTime = 0.0f;
 
+		bIsPaused = false;
+		bIsStarted = false;
 	}
 }
 
@@ -29,6 +30,7 @@ Timer::Timer(bool init)
 Timer::~Timer()
 {
 	//Does this need anything?
+	Stop();
 }
 
 void Timer::Start()
@@ -40,9 +42,8 @@ void Timer::Start()
 	bIsPaused = false;
 
 	//Clock current time
-	fElapsedTime = 0.0f;
-	fCurrentTime = 0.0f;
-	fLastTime = SDL_GetTicks() / 1000.0f ;
+	fStartTime = (SDL_GetTicks() / 1000.0f);
+	fPausedTime = 0;
 }
 
 void Timer::Stop()
@@ -50,10 +51,7 @@ void Timer::Stop()
 	bIsStarted = false;
 	bIsPaused = false;
 
-	fElapsedTime = 0.0f;
-	fCurrentTime = 0.0f;
-	fLastTime = 0.0f;
-
+	fStartTime = 0.0f;
 	fPausedTime = 0.0f;
 }
 
@@ -65,30 +63,45 @@ void Timer::Pause()
 		//Pause the timer
 		bIsPaused = true;
 
-		//Calculate the paused ticks, pTime = "currentTime" - lastTime???
-		//TODO CODE HERE
+		//Set the time mark for when we paused
+		fPausedTime = (SDL_GetTicks() / 1000.0f) - fStartTime;
+		fStartTime = 0;
 	}
 }
 
 void Timer::Unpause()
 {
-}
+	//If timer is running and paused
+	if(bIsStarted && bIsPaused)
+	{
+		//Resume timer
+		bIsPaused = false;
 
+		//Reset Start Time
+		fStartTime = (SDL_GetTicks() / 1000.f) - fPausedTime;
 
-// Updates timer from last delta time
-void Timer::Update()
-{
-	fCurrentTime = SDL_GetTicks() / 1000.0f; //Calculate current time frame
-	fElapsedTime = fCurrentTime - fLastTime; //Time since last update call
-	fLastTime = fCurrentTime;  //Current time is now the most recent time stamp for update call
-
-	//Accumulate time for local timer
-	fTimeAccumulator += fCurrentTime - fLastTime;
+		//Reset Paused Time
+		fPausedTime = 0;
+	}
 }
 
 
 // Get elapsed time from last timer update call
-float Timer::GetElapsedFromLastUpdate()
+float Timer::GetTime()
 {
-	return fElapsedTime;
+	float time = 0;
+
+	if (bIsStarted)
+	{
+		if (bIsPaused)
+		{
+			time = fPausedTime; //Time marked at pause call
+		}
+		else
+		{
+			time = (SDL_GetTicks() / 1000.f) - fStartTime;
+		}
+	}
+
+	return time;
 }

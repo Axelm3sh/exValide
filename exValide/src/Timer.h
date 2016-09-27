@@ -6,13 +6,9 @@
 class Timer
 {
 private:
-	float fElapsedTime; //Elapsed time since last update call
-	float fCurrentTime; //Current Time
-	float fLastTime; //Last time frame since an update was called
 
-	float fPausedTime; //To account Tick time difference since a pause
-
-	float fTimeAccumulator; //Seconds accumulated when timer was unpaused
+	float fStartTime; //clock time when timer started
+	float fPausedTime; //Stored Time at when timer was paused
 
 	bool bIsStarted;
 	bool bIsPaused;
@@ -26,13 +22,11 @@ public:
 	void Pause();
 	void Unpause();
 
-	// Updates timer from last delta time, should be called every tick cycle if used for world time
-	void Update();
-	// Get elapsed time from last Time update
-	float GetElapsedFromLastUpdate();
+	//Get the current clock time the timer is at
+	float GetTime();
 
-	//Return the total time passed unpaused
-	float GetTotalTime();
+	//float GetDelta();
+
 };
 
 
