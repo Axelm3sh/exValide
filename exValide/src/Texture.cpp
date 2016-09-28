@@ -18,8 +18,8 @@ Texture::~Texture()
 	free();
 }
 
-//Should not really use this
-SDL_Texture * Texture::LoadTexture(std::string path)
+//Should not really use this explicitly
+SDL_Texture * Texture::LoadTexture(std::string path, SDL_Color keyColor)
 {
 	SDL_Texture* newTexture = NULL;
 
@@ -33,8 +33,8 @@ SDL_Texture * Texture::LoadTexture(std::string path)
 	else
 	{
 		//Color key image, keying out cyan (taking out the color cyan to see through those parts colored cyan) TODO optimize
-		SDL_SetColorKey(loadedSurfacePixel, SDL_TRUE, SDL_MapRGB(loadedSurfacePixel->format, 0, 0xFF, 0xFF));
-
+		SDL_SetColorKey(loadedSurfacePixel, SDL_TRUE, SDL_MapRGB(loadedSurfacePixel->format, keyColor.r, keyColor.g, keyColor.b));
+		
 		//Todo create new texture from surface
 		newTexture = SDL_CreateTextureFromSurface(RenderTo, loadedSurfacePixel);
 		if (newTexture == NULL)
@@ -55,9 +55,9 @@ SDL_Texture * Texture::LoadTexture(std::string path)
 	return newTexture;
 }
 
-bool Texture::LoadFromFile(std::string path)
+bool Texture::LoadFromFile(std::string path, SDL_Color keyColor)
 {
-	mTexture = LoadTexture(path); //Return Texture
+	mTexture = LoadTexture(path, keyColor); //Return Texture
 
 	if (mTexture != NULL)
 	{

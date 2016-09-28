@@ -7,6 +7,12 @@
 #include "SDL_ttf.h"
 #include <cmath>
 
+//Screen dimension constants, can be changed down line
+const int SCREEN_WIDTH_SD = 640;
+const int SCREEN_HEIGHT_SD = 480;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
+
 //Colors
 const SDL_Color CWhite = {255,255,255}; //WWhite
 const SDL_Color CBlack = { 0, 0, 0 }; //Black

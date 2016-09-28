@@ -6,6 +6,7 @@
 #include "Framework.h"
 #include "FileManager.h"
 #include "Texture.h"
+#include "InputManager.h"
 
 class Engine
 {
@@ -14,7 +15,7 @@ public:
 	~Engine();
 
 	//Starts the engine initializing everything to defaults, if already running don't do anything (shouldn't call more than once??)
-	void Run();
+	void Run(int width = SCREEN_WIDTH, int height = SCREEN_HEIGHT, bool vsync = true);
 
 	//Pauses the game, pauses timer, brings up pause menu (TODO)
 	void Pause();
@@ -29,7 +30,7 @@ public:
 	void UpdateFrame();
 
 	//FIXME - May or may not need this, calculations done after the frame has been already rendered
-	void PostStep();
+	//void PostStep();
 
 	//Stops the engine if it's running and closes window
 	void Quit();
@@ -39,7 +40,9 @@ private:
 	bool bEngineIsPaused;
 
 	Timer worldTime; //Timer that runs for the duration of the engine lifetime, does not tick over pause
-	SDL_Event InputHandler; //SDL_Event handles all input user has made
+	float deltaTime; //Delta time since last UpdateFrame Call
+
+	InputManager InputHandler; //SDL_Event handles all input user has made
 
 	Framework RenderFramework;
 

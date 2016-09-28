@@ -22,7 +22,8 @@ public:
 	~Framework();
 
 	// Initializes the window, should be called in constructor
-	bool Init(int screenWidth, int screenHeight);
+	bool Init(int screenWidth, int screenHeight, bool allowVsync = true);
+
 	// Stops Engine Processes, should be the last function called before exiting out of program
 	void Quit();
 
@@ -30,8 +31,6 @@ public:
 	void Refresh(); //Wrapper SDL_RenderPresent(gWindowRenderer);
 	//Clear screen
 	void Clear();	//Wrapper SDL_RenderClear(gWindowRenderer);
-	//void QueueTexture(); //Pushes texture to renderer, when refresh is called update all at once?
-
 
 	//returns the renderer
 	SDL_Renderer* getRenderer();

@@ -18,7 +18,7 @@ Framework::~Framework()
 
 
 // Initializes the window, should be called in constructor
-bool Framework::Init(int screenWidth, int screenHeight)
+bool Framework::Init(int screenWidth, int screenHeight, bool allowVSync)
 {
 	//Initialization flag
 	bool success = true;
@@ -46,6 +46,7 @@ bool Framework::Init(int screenWidth, int screenHeight)
 			success = false;
 		}
 
+
 		//Create window with screenWidth and screenHeight
 		gWindow = SDL_CreateWindow("exValide Build x.xx", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 									screenWidth, screenHeight, SDL_WINDOW_SHOWN);
@@ -56,8 +57,17 @@ bool Framework::Init(int screenWidth, int screenHeight)
 		}
 		else
 		{
-			//Create renderer for window
-			gWindowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+			if (allowVSync)
+			{
+				//Create renderer for window, using vsync
+				gWindowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			}
+			else
+			{
+				//No Vsync, TODO handle no vsync issues (mostly with animations perhaps?)
+				gWindowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+			}
+
 			if (gWindowRenderer == NULL)
 			{
 				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
