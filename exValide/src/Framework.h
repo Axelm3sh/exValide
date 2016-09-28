@@ -2,17 +2,13 @@
 #define FRAMEWORK_H
 
 #include <iostream>
-#include "Timer.h"
-#include "SDL.h"
-#include "SDL_ttf.h"
-#include "SDL_image.h"
-
+#include "GDefinitions.h"
 
 /*This class should act as a container that holds multiple classes. 
 	This really should only hold the window to render things on and/or call Update.
 	Holds a timer for the duration of the window.
 */
-class CFramework
+class Framework
 {
 private: 
 	SDL_Window* gWindow; //This is the main window that displays surfaces/textures/etc..
@@ -21,9 +17,9 @@ private:
 	bool bFrameworkIsRunning;
 
 public:
-	CFramework();
-	CFramework(int w, int h);
-	~CFramework();
+	Framework();
+	Framework(int w, int h);
+	~Framework();
 
 	// Initializes the window, should be called in constructor
 	bool Init(int screenWidth, int screenHeight);

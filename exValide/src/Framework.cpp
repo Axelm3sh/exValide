@@ -1,24 +1,24 @@
 #include "Framework.h"
 
-CFramework::CFramework()
+Framework::Framework()
 {
 	gWindow = NULL;
 	gWindowRenderer = NULL;
 }
 
-CFramework::CFramework(int w, int h)
+Framework::Framework(int w, int h)
 {
 	Init(w, h); //Initialize engine and set loop bool to true if non-default construct
 }
 
-CFramework::~CFramework()
+Framework::~Framework()
 {
 	Quit();
 }
 
 
 // Initializes the window, should be called in constructor
-bool CFramework::Init(int screenWidth, int screenHeight)
+bool Framework::Init(int screenWidth, int screenHeight)
 {
 	//Initialization flag
 	bool success = true;
@@ -82,7 +82,7 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 }
 
 // Stops Engine Processes, should be the last function called before exiting out of program
-void CFramework::Quit()
+void Framework::Quit()
 {
 	//Destroy Renderer
 	SDL_DestroyRenderer(gWindowRenderer);
@@ -99,25 +99,25 @@ void CFramework::Quit()
 }
 
 
-void CFramework::Refresh()
+void Framework::Refresh()
 {
 	SDL_RenderPresent(gWindowRenderer);
 }
 
-void CFramework::Clear()
+void Framework::Clear()
 {
 	SDL_RenderClear(gWindowRenderer);
 }
 
 
 //Return the pointer to the renderer, should point textures and surfaces here
-SDL_Renderer* CFramework::getRenderer()
+SDL_Renderer* Framework::getRenderer()
 {
 	return gWindowRenderer;
 }
 
 //returns pointer to the window to draw stuff on
-SDL_Window* CFramework::getWindow()
+SDL_Window* Framework::getWindow()
 {
 	return gWindow;
 }

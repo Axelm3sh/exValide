@@ -25,7 +25,7 @@ public:
 	//Get the current clock time the timer is at
 	float GetTime();
 
-	//float GetDelta();
+	//float GetDelta(); //FIXME - get delta time some other way? maybe in engine
 
 };
 
