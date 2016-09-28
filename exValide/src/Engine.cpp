@@ -44,5 +44,7 @@ void Engine::UpdateFrame()
 
 void Engine::Quit()
 {
-
+	bEngineIsPaused = false;
+	bEngineIsRunning = false;
+	RenderFramework.Quit();
 }
