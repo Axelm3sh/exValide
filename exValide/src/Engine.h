@@ -43,6 +43,7 @@ private:
 
 	Framework RenderFramework;
 
+	FileManager fileManager;
 };
 
 #endif  /*ENGINE_H*/
