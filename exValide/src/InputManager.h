@@ -24,7 +24,7 @@ public:
 
 	SDL_MouseWheelEvent* CheckMouseWheelEvent(); //MOUSEWHEEL
 
-	SDL_QuitEvent* CheckQuitEvent(SDL_Event &e); //QUIT
+	SDL_QuitEvent* CheckQuitEvent(); //QUIT
 
 	SDL_Event* getEvent();
 

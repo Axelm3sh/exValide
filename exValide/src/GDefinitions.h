@@ -13,6 +13,8 @@ const int SCREEN_HEIGHT_SD = 480;
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
+const std::string BUILD_VER = "ExValide Build 0.10";
+
 //Colors
 const SDL_Color CWhite = {255,255,255}; //WWhite
 const SDL_Color CBlack = { 0, 0, 0 }; //Black

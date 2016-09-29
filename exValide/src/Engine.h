@@ -15,7 +15,7 @@ public:
 	~Engine();
 
 	//Starts the engine initializing everything to defaults, if already running don't do anything (shouldn't call more than once??)
-	void Run(int width = SCREEN_WIDTH, int height = SCREEN_HEIGHT, bool vsync = true);
+	void Run(int width = SCREEN_WIDTH_SD, int height = SCREEN_HEIGHT_SD, bool vsync = true);
 
 	//Pauses the game, pauses timer, brings up pause menu (TODO)
 	void Pause();

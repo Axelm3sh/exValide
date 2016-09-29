@@ -18,10 +18,10 @@ void Engine::Run(int w, int h, bool vsync)
 	bEngineIsRunning = RenderFramework.Init(w ,h, vsync);
 	bEngineIsPaused = false;
 
-	while (bEngineIsRunning)
+	/*while (bEngineIsRunning)
 	{
 
-	}
+	}*/
 
 
 }

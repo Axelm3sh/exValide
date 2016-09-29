@@ -48,7 +48,7 @@ bool Framework::Init(int screenWidth, int screenHeight, bool allowVSync)
 
 
 		//Create window with screenWidth and screenHeight
-		gWindow = SDL_CreateWindow("exValide Build x.xx", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+		gWindow = SDL_CreateWindow(BUILD_VER.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 									screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
