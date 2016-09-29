@@ -11,7 +11,7 @@ public:
 	InputManager();
 	~InputManager();
 	
-	//Single dequeue
+	//Single event dequeue
 	void ProcessEvent();
 
 	/*Check functions for different types of events, acts as filters after calling Process Event*/

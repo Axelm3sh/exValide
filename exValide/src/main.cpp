@@ -21,9 +21,12 @@ int main(int argc, char **argv)
 	{
 		testInput.ProcessEvent();
 
-		if (testInput.CheckQuitEvent())
+		switch (testInput.getEvent()->type)
 		{
+		case SDL_QUIT:
 			quit = true;
+			break;
+		default:
 		}
 
 		if (testInput.CheckKeyboardEvent())
