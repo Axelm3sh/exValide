@@ -16,15 +16,15 @@ public:
 
 	/*Check functions for different types of events, acts as filters after calling Process Event*/
 
-	SDL_KeyboardEvent* CheckKeyboardEvent();//KEYDOWN and KEYUP
+	virtual SDL_KeyboardEvent* CheckKeyboardEvent();//KEYDOWN and KEYUP
 
-	SDL_MouseMotionEvent* CheckMouseMotionEvent(); //MOUSEMOTION
+	virtual SDL_MouseMotionEvent* CheckMouseMotionEvent(); //MOUSEMOTION
 
-	SDL_MouseButtonEvent* CheckMouseButtonEvent(); //MOUSEBUTTONDOWN and MOUSEBUTTONUP
+	virtual SDL_MouseButtonEvent* CheckMouseButtonEvent(); //MOUSEBUTTONDOWN and MOUSEBUTTONUP
 
-	SDL_MouseWheelEvent* CheckMouseWheelEvent(); //MOUSEWHEEL
+	virtual SDL_MouseWheelEvent* CheckMouseWheelEvent(); //MOUSEWHEEL
 
-	SDL_QuitEvent* CheckQuitEvent(); //QUIT
+	virtual SDL_QuitEvent* CheckQuitEvent(); //QUIT
 
 	SDL_Event* getEvent();
 

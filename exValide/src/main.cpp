@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 		case SDL_QUIT:
 			quit = true;
 			break;
-		default:
+		default:;
+
 		}
 
 		if (testInput.CheckKeyboardEvent())
@@ -35,6 +36,7 @@ int main(int argc, char **argv)
 			printf("\nPhysical %s key acting as %s key",
 				SDL_GetScancodeName(testInput.getEvent()->key.keysym.scancode),
 				SDL_GetKeyName(testInput.getEvent()->key.keysym.sym));
+
 		}
 
 	}
