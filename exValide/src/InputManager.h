@@ -41,6 +41,8 @@ public:
 private:
 	SDL_Event event;
 
+
+
 	//Timer counter; //use for Key Press delays? Restrictions/cooldown? Long-press?
 };
 

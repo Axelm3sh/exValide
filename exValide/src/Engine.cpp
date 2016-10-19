@@ -34,9 +34,16 @@ void Engine::Run(int w, int h, bool vsync)
 			case SDL_QUIT:
 				Quit();
 				break;
+			case SDL_KEYDOWN:
+				if (InputHandler.getEvent()->key.keysym.sym == SDLK_ESCAPE)
+				{
+					Quit();
+				}
+				break;
+
 			default:;
 
-			}
+			}//END SWITCH EVENT TYPE
 
 			Step();
 		}
@@ -63,15 +70,22 @@ void Engine::Step()
 
 	//FIXME
 	//TEST
-	printf("Time %f, Sinx %f", worldTime.GetTime(), sin(worldTime.GetTime()));
-	SDL_Rect Rect = { 60, 60, (int) floor(sin(worldTime.GetTime())), 20 };
-	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), CYellow.r, CYellow.g, CYellow.b, CYellow.a);
-	SDL_RenderFillRect(RenderFramework.getRenderer(), &Rect);
+	RenderFramework.Clear();
+
+	printf("Time %f, Sinx %f\n", worldTime.GetTime(), (100 + sin(worldTime.GetTime()) * 20) );
+	SDL_Rect Rect = { (60 + (int)floor(sin(worldTime.GetTime()) * 20)), 60, (100 + (int) floor( sin(worldTime.GetTime())*20 ) ), 20 };
+	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), 0, 255, 25, 150); //Set color for rect, overrides background window color
+	SDL_RenderFillRect(RenderFramework.getRenderer(), &Rect); 
+	
+	//Rerender
+	RenderFramework.Refresh();
+
 }
 
 void Engine::UpdateFrame()
 {
 	//Should step just update the actor's render components as well? this might not be needed...
+	/*RenderFramework.Refresh();*/
 }
 
 void Engine::Quit()

@@ -25,10 +25,6 @@ SDL_KeyboardEvent* InputManager::CheckKeyboardEvent()
 	{
 		keyEvent = &event.key;
 	}
-	else
-	{
-		keyEvent = NULL;
-	}
 
 	return keyEvent;
 }
@@ -41,10 +37,7 @@ SDL_MouseMotionEvent * InputManager::CheckMouseMotionEvent()
 	{
 		mMotionEvent = &event.motion;
 	}
-	else
-	{
-		mMotionEvent = NULL;
-	}
+
 	return mMotionEvent;
 }
 
@@ -56,10 +49,7 @@ SDL_MouseButtonEvent * InputManager::CheckMouseButtonEvent()
 	{
 		mButtonEvent = &event.button;
 	}
-	else
-	{
-		mButtonEvent = NULL;
-	}
+
 	return mButtonEvent;
 }
 
@@ -71,10 +61,7 @@ SDL_MouseWheelEvent * InputManager::CheckMouseWheelEvent()
 	{
 		mWheelEvent = &event.wheel;
 	}
-	else
-	{
-		mWheelEvent = NULL;
-	}
+
 	return mWheelEvent;
 }
 
@@ -86,10 +73,7 @@ SDL_QuitEvent * InputManager::CheckQuitEvent()
 	{
 		quitEvent = &event.quit;
 	}
-	else
-	{
-		quitEvent = NULL;
-	}
+
 	return quitEvent;
 }
 

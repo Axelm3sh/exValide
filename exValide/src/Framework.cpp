@@ -116,6 +116,7 @@ void Framework::Refresh()
 
 void Framework::Clear()
 {
+	SDL_SetRenderDrawColor(gWindowRenderer, 100, 0, 0, 255); //dark red window
 	SDL_RenderClear(gWindowRenderer);
 }
 
