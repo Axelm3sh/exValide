@@ -11,10 +11,10 @@ InputManager::~InputManager()
 {
 }
 
-void InputManager::ProcessEvent()
+int InputManager::ProcessEvent()
 {
 	//If there is an event, dequeue and put into &event
-	SDL_PollEvent(&event);
+	return SDL_PollEvent(&event);
 }
 
 SDL_KeyboardEvent* InputManager::CheckKeyboardEvent()

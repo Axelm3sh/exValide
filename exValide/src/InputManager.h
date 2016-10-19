@@ -8,11 +8,20 @@
 class InputManager
 {
 public:
+	enum E_EVENTCHECKTYPE
+	{
+		QUIT,
+		KEYBOARD,
+		MOUSEMOTION,
+		MOUSEBUTTON,
+		MOUSEWHEEL
+	};
+
 	InputManager();
 	~InputManager();
 	
-	//Single event dequeue
-	void ProcessEvent();
+	//Single event dequeue, returns non-zero if events are on queue
+	int ProcessEvent();
 
 	/*Check functions for different types of events, acts as filters after calling Process Event*/
 
@@ -26,6 +35,7 @@ public:
 
 	virtual SDL_QuitEvent* CheckQuitEvent(); //QUIT
 
+	//Get the event on queue, doesn't check for NULL yet, and I'm not sure what is in the queue when empty
 	SDL_Event* getEvent();
 
 private:
