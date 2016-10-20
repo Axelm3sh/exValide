@@ -73,7 +73,7 @@ void Engine::Step()
 	RenderFramework.Clear();
 
 	printf("Time %f, Sinx %f\n", worldTime.GetTime(), (100 + sin(worldTime.GetTime()) * 20) );
-	SDL_Rect Rect = { (60 + (int)floor(sin(worldTime.GetTime()) * 20)), 60, (100 + (int) floor( sin(worldTime.GetTime())*20 ) ), 20 };
+	SDL_Rect Rect = { (60 + (int)floor(sin(worldTime.GetTime()) * 60)), 60, (100 + (int) floor( sin(worldTime.GetTime())*30 ) ), 20 };
 	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), 0, 255, 25, 150); //Set color for rect, overrides background window color
 	SDL_RenderFillRect(RenderFramework.getRenderer(), &Rect); 
 	

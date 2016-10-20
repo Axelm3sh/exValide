@@ -3,6 +3,8 @@
 
 #include "GDefinitions.h"
 #include "Timer.h"
+#include <list>
+#include <map>
 
 //Basically a Queue for different types of events, class is mostly wrapper for ease of use
 class InputManager
@@ -41,7 +43,9 @@ public:
 private:
 	SDL_Event event;
 
+	typedef void(*funcParam)();//Func pointer type def
 
+	map<SDL_Keycode, list<funcParam> > BindsMapping;
 
 	//Timer counter; //use for Key Press delays? Restrictions/cooldown? Long-press?
 };
