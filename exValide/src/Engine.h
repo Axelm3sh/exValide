@@ -48,6 +48,9 @@ private:
 
 	FileManager fileManager;
 
+	//DEBUG
+	int x, y, h, w;
+
 };
 
 #endif  /*ENGINE_H*/

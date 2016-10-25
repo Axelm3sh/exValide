@@ -3,21 +3,12 @@
 
 #include "GDefinitions.h"
 #include "Timer.h"
-#include "InputComponent.h"
+#include <map>
 
 //Basically a Queue for different types of events, class is mostly wrapper for ease of use
 class InputManager
 {
 public:
-	enum E_EVENTCHECKTYPE
-	{
-		QUIT,
-		KEYBOARD,
-		MOUSEMOTION,
-		MOUSEBUTTON,
-		MOUSEWHEEL
-	};
-
 	InputManager();
 	~InputManager();
 	
@@ -27,8 +18,12 @@ public:
 	//Get the event on queue, doesn't check for NULL yet, and I'm not sure what is in the queue when empty
 	SDL_Event* getEvent();
 
+	SDL_Keycode getKeyCode();
+
 private:
 	SDL_Event event;
+
+	std::map<SDL_Keycode, bool> keyPressedDown;
 
 	//Timer counter; //use for Key Press delays? Restrictions/cooldown? Long-press?
 };

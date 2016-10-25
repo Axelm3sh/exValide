@@ -23,3 +23,8 @@ SDL_Event * InputManager::getEvent()
 	return &event;
 }
 
+SDL_Keycode InputManager::getKeyCode()
+{
+	return event.key.keysym.sym;	
+}
+

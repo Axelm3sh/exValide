@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\InputComponent.cpp" />
+    <ClCompile Include="src\EventHandler.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\FileManager.cpp" />
@@ -29,7 +29,7 @@
     <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\InputComponent.h" />
+    <ClInclude Include="src\EventHandler.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\FileManager.h" />
