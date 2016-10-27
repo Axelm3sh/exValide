@@ -138,7 +138,7 @@ void Engine::Step()
 
 	//printf("Time %f, Sinx %f\n", worldTime.GetTime(), (100 + sin(worldTime.GetTime()) * 20) );
 	printf("x %d, y %d, w %d, h %d\n", x, y, x+30, y+30 );
-	SDL_Rect Rect = { (x + (int)floor(sin(worldTime.GetTime()) * 60)), y, (x+30 + (int) floor( sin(worldTime.GetTime())*30 ) ), y+30 };
+	SDL_Rect Rect = { (x + (int)floor(sin(worldTime.GetTime()) * 60)), y, (30 + (int) floor( sin(worldTime.GetTime())*30 ) ), 30 };
 	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), 0, 255, 25, 150); //Set color for rect, overrides background window color
 	SDL_RenderFillRect(RenderFramework.getRenderer(), &Rect); 
 	

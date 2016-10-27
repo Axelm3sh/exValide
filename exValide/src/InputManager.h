@@ -18,12 +18,14 @@ public:
 	//Get the event on queue, doesn't check for NULL yet, and I'm not sure what is in the queue when empty
 	SDL_Event* getEvent();
 
-	SDL_Keycode getKeyCode();
+	bool isPressed(SDL_Keycode key);
+	bool isReleased(SDL_Keycode key);
+
+	
 
 private:
 	SDL_Event event;
-
-	std::map<SDL_Keycode, bool> keyPressedDown;
+	
 
 	//Timer counter; //use for Key Press delays? Restrictions/cooldown? Long-press?
 };
