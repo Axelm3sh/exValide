@@ -21,11 +21,13 @@ public:
 	bool isPressed(SDL_Keycode key);
 	bool isReleased(SDL_Keycode key);
 
-	
+	//TODO also do something similar to mouse control
 
 private:
 	SDL_Event event;
 	
+	//To handle multi-key input
+	std::map<SDL_Keycode, Uint32> keyState;
 
 	//Timer counter; //use for Key Press delays? Restrictions/cooldown? Long-press?
 };
