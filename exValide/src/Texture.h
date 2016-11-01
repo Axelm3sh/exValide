@@ -14,10 +14,10 @@ public:
 	//CALL THIS FIRST OR ELSE TEXTURE WILL NOT RENDER AT ALL
 	void setRenderTo(SDL_Renderer* reference);
 
-	SDL_Texture* LoadTexture(std::string path);
+	SDL_Texture* LoadTexture(std::string path, SDL_Color keyColor);
 
-	//loads image from specified path, DO NOT USE IF RENDERER IS NOT SET
-	bool LoadFromFile(std::string path);
+	//loads image from specified path, default color key is cyan, DO NOT USE IF RENDERER IS NOT SET
+	bool LoadFromFile(std::string path, SDL_Color keyColor = CCyan);
 
 	//Makes texture from a text string, you can override last 2 parameters for different font size or font file
 	bool LoadFromText(std::string text, SDL_Color textColor, int textSize = 28, std::string pathToTFF = "res/fonts/VCR_OSD_MONO_1.001.ttf");
@@ -34,7 +34,13 @@ public:
 	//Alpha channel set
 	void setAlpha(Uint8 alpha);
 
-	//Renders texture at given point
+	/*@brief: Renders texture with given variables applied.
+	@param x X-value to shift texture
+	@param y Y-value to shift texture
+	@param clip The Rectangle that we use to clip the image, NULL means no clip so display all of image instead of section
+	@param angle The degree that the image should be rotated
+	@param center The point at which image should be rotated, NULL means rotation will be applied to center of image
+	@param flip Used for flipping around the image (ie vertically, horizontally), default is no flip*/
 	void render(int x, int y, 
 				SDL_Rect* clip = NULL, 
 				double angle = 0.0,

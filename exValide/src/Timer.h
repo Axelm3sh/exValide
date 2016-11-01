@@ -6,17 +6,27 @@
 class Timer
 {
 private:
-	float fElapsedTime;
-	float fCurrentTime;
-	float fLastTime;
+
+	float fStartTime; //clock time when timer started
+	float fPausedTime; //Stored Time at when timer was paused
+
+	bool bIsStarted;
+	bool bIsPaused;
 public:
-	Timer(); //Construct and initialize
+	Timer(); //Construct
+	Timer(bool); //Construct and Start Timer
 	~Timer(); //Destructor
 
-	// Updates timer from last delta time, should be called every tick cycle if used for world time
-	void Update();
-	// Get elapsed time from timer initialization
-	float GetElapsed();
+	void Start();
+	void Stop();
+	void Pause();
+	void Unpause();
+
+	//Get the current clock time the timer is at
+	float GetTime();
+
+	//float GetDelta(); //FIXME - get delta time some other way? maybe in engine
+
 };
 
 

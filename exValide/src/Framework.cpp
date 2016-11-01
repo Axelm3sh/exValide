@@ -1,24 +1,24 @@
 #include "Framework.h"
 
-CFramework::CFramework()
+Framework::Framework()
 {
 	gWindow = NULL;
 	gWindowRenderer = NULL;
 }
 
-CFramework::CFramework(int w, int h)
+Framework::Framework(int w, int h)
 {
 	Init(w, h); //Initialize engine and set loop bool to true if non-default construct
 }
 
-CFramework::~CFramework()
+Framework::~Framework()
 {
 	Quit();
 }
 
 
 // Initializes the window, should be called in constructor
-bool CFramework::Init(int screenWidth, int screenHeight)
+bool Framework::Init(int screenWidth, int screenHeight, bool allowVSync)
 {
 	//Initialization flag
 	bool success = true;
@@ -46,8 +46,9 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 			success = false;
 		}
 
+
 		//Create window with screenWidth and screenHeight
-		gWindow = SDL_CreateWindow("exValide Build x.xx", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+		gWindow = SDL_CreateWindow(BUILD_VER.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 									screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
@@ -56,8 +57,17 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 		}
 		else
 		{
-			//Create renderer for window
-			gWindowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+			if (allowVSync)
+			{
+				//Create renderer for window, using vsync
+				gWindowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			}
+			else
+			{
+				//No Vsync, TODO handle no vsync issues (mostly with animations perhaps?)
+				gWindowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+			}
+
 			if (gWindowRenderer == NULL)
 			{
 				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
@@ -82,7 +92,7 @@ bool CFramework::Init(int screenWidth, int screenHeight)
 }
 
 // Stops Engine Processes, should be the last function called before exiting out of program
-void CFramework::Quit()
+void Framework::Quit()
 {
 	//Destroy Renderer
 	SDL_DestroyRenderer(gWindowRenderer);
@@ -99,25 +109,26 @@ void CFramework::Quit()
 }
 
 
-void CFramework::Refresh()
+void Framework::Refresh()
 {
 	SDL_RenderPresent(gWindowRenderer);
 }
 
-void CFramework::Clear()
+void Framework::Clear()
 {
+	SDL_SetRenderDrawColor(gWindowRenderer, 100, 0, 0, 255); //dark red window
 	SDL_RenderClear(gWindowRenderer);
 }
 
 
 //Return the pointer to the renderer, should point textures and surfaces here
-SDL_Renderer* CFramework::getRenderer()
+SDL_Renderer* Framework::getRenderer()
 {
 	return gWindowRenderer;
 }
 
 //returns pointer to the window to draw stuff on
-SDL_Window* CFramework::getWindow()
+SDL_Window* Framework::getWindow()
 {
 	return gWindow;
 }
