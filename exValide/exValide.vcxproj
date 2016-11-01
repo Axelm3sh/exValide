@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AObject.cpp" />
     <ClCompile Include="src\EventHandler.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AObject.h" />
     <ClInclude Include="src\EventHandler.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Engine.h" />

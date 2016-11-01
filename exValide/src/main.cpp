@@ -2,13 +2,23 @@
 #include <stdio.h>
 #include "Engine.h"
 
-#include "InputManager.h"
+//TEST CLASS
+#include "DummyBox.h"
 
 
 //START MAIN
 int main(int argc, char **argv)
 {
 	cout << "Hello World!";
+
+	DummyBox dummy;
+	dummy.SetObjName("What am I?");
+
+	printf("TYPE: %d FLAG: %d\n", dummy.GetType(), dummy.GetFlag() );
+	cout << dummy.GetObjName();
+	
+	char te;
+	cin >> te;
 
 	Engine Game;
 	Game.Run();
