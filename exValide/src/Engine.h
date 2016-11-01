@@ -51,7 +51,7 @@ private:
 	FileManager fileManager;
 
 	//DEBUG
-	int x, y, h, w;
+	int x, y;
 
 };
 
