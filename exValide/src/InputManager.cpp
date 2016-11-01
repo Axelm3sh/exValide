@@ -23,9 +23,17 @@ int InputManager::ProcessEvent()
 			//Case where event type is a Keyboard press or release, set keycode and then the type
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			keyState[event.key.keysym.sym] = event.type;
+			keyState[event.key.keysym.sym] = event.key.type;
 			break;
-		default:
+			//Case where mouse buttons are clicked
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
+			mouseState[event.button.button] = event.button.type;
+			
+			//TODO - Implement mouse wheel detection SDL_MouseMotionEvent
+			//TODO - Mouse motion detection?
+			//TODO - controller support? Touch Support?
+		default: ;
 		}
 
 	}
@@ -38,14 +46,29 @@ SDL_Event * InputManager::getEvent()
 	return &event;
 }
 
-bool InputManager::isPressed(SDL_Keycode key)
+bool InputManager::isKeyPressed(SDL_Keycode key)
 {
 	return (keyState[key] == SDL_KEYDOWN);
 }
 
-bool InputManager::isReleased(SDL_Keycode key)
+bool InputManager::isKeyReleased(SDL_Keycode key)
 {
 	return (keyState[key] == SDL_KEYUP);
+}
+
+bool InputManager::isLeftClickPressed()
+{
+	return (mouseState[SDL_BUTTON_LEFT] == SDL_MOUSEBUTTONDOWN);
+}
+
+bool InputManager::isRightClickedPressed()
+{
+	return (mouseState[SDL_BUTTON_RIGHT] == SDL_MOUSEBUTTONDOWN);
+}
+
+bool InputManager::isMiddleClickedPressed()
+{
+	return (mouseState[SDL_BUTTON_MIDDLE] == SDL_MOUSEBUTTONDOWN);
 }
 
 

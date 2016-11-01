@@ -18,8 +18,12 @@ public:
 	//Get the event on queue, doesn't check for NULL yet, and I'm not sure what is in the queue when empty
 	SDL_Event* getEvent();
 
-	bool isPressed(SDL_Keycode key);
-	bool isReleased(SDL_Keycode key);
+	bool isKeyPressed(SDL_Keycode key);
+	bool isKeyReleased(SDL_Keycode key);
+
+	bool isLeftClickPressed();
+	bool isRightClickedPressed();
+	bool isMiddleClickedPressed();
 
 	//TODO also do something similar to mouse control
 
@@ -28,6 +32,9 @@ private:
 	
 	//To handle multi-key input
 	std::map<SDL_Keycode, Uint32> keyState;
+
+	//Mouse button type, state of button
+	std::map<Uint8, Uint32> mouseState;
 
 	//Timer counter; //use for Key Press delays? Restrictions/cooldown? Long-press?
 };

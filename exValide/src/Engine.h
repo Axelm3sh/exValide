@@ -39,6 +39,8 @@ private:
 	bool bEngineIsRunning;
 	bool bEngineIsPaused;
 
+	int engineScreenWidth, engineScreenHeight;
+
 	Timer worldTime; //Timer that runs for the duration of the engine lifetime, does not tick over pause
 	float deltaTime; //Delta time since last UpdateFrame Call
 
