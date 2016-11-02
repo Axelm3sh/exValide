@@ -39,7 +39,10 @@
     <ClCompile Include="src\EventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AObject.cpp">
+    <ClCompile Include="src\Object\AObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\TSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +71,10 @@
     <ClInclude Include="src\EventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\AObject.h">
+    <ClInclude Include="src\Object\AObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\TSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
