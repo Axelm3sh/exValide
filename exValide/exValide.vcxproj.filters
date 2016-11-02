@@ -77,10 +77,16 @@
     <ClInclude Include="src\Object\TSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\hello_world.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="json\LICENSE.MIT" />
   </ItemGroup>
 </Project>

@@ -31,6 +31,7 @@
     <ClCompile Include="src\Object\TSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="json\json.hpp" />
     <ClInclude Include="src\Object\AObject.h" />
     <ClInclude Include="src\EventHandler.h" />
     <ClInclude Include="src\InputManager.h" />
@@ -44,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\hello_world.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="json\LICENSE.MIT" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{197E9991-DD07-46E9-8B4F-09BDE785A16C}</ProjectGuid>
