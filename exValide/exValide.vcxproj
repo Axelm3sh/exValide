@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AObject.cpp" />
+    <ClCompile Include="src\Object\AObject.cpp" />
     <ClCompile Include="src\EventHandler.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
@@ -28,9 +28,10 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\Object\TSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AObject.h" />
+    <ClInclude Include="src\Object\AObject.h" />
     <ClInclude Include="src\EventHandler.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Engine.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="src\Framework.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\Object\TSprite.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\hello_world.bmp" />

@@ -1,7 +1,7 @@
 #ifndef AObject_H
 #define AObject_H
 
-#include "GDefinitions.h"
+#include "../GDefinitions.h"
 
 class AObject
 {
@@ -26,7 +26,7 @@ public:
 	inline OBJ_TYPE GetType() { return objType; };
 	
 
-private:
+protected:
 	std::string objectName;
 	OBJ_FLAGS objFlag;
 	OBJ_TYPE objType;
