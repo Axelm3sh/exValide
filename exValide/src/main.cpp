@@ -2,26 +2,20 @@
 #include <stdio.h>
 #include "Engine.h"
 
-//TEST CLASS
-#include "DummyBox.h"
-
-
 //START MAIN
 int main(int argc, char **argv)
 {
 	cout << "Hello World!";
 
-	DummyBox dummy;
-	dummy.SetObjName("What am I?");
+	FileManager jsonManage;
 
-	printf("TYPE: %d FLAG: %d\n", dummy.GetType(), dummy.GetFlag() );
-	cout << dummy.GetObjName();
+	jsonManage.DebugWriteJsonObj();
 	
 	char te;
 	cin >> te;
 
-	Engine Game;
-	Game.Run();
+	//Engine Game;
+	//Game.Run();
 
 	//InputManager testInput;
 

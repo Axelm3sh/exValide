@@ -4,10 +4,12 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <map>
 #include "GDefinitions.h"
+#include "../json/json.hpp"
 
 using namespace std;
+// for convenience
+using json = nlohmann::json;
 
 /*Class File Manager
 	@brief: Purpose is to manage files in the resources folder through an external file
@@ -25,6 +27,10 @@ public:
 	~FileManager();
 
 	void BeginParse();
+	void BeginParseResourceFile();
+	
+	//Test Debug Write Json
+	void DebugWriteJsonObj();
 
 	//Search map for object name, return path to file
 	string findFileByNameTag(string tag);
