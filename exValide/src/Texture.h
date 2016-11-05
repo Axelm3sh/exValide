@@ -35,8 +35,8 @@ public:
 	void setAlpha(Uint8 alpha);
 
 	/*@brief: Renders texture with given variables applied.
-	@param x X-value to shift texture
-	@param y Y-value to shift texture
+	@param x X-pos to shift texture
+	@param y Y-pos to shift texture
 	@param clip The Rectangle that we use to clip the image, NULL means no clip so display all of image instead of section
 	@param angle The degree that the image should be rotated
 	@param center The point at which image should be rotated, NULL means rotation will be applied to center of image
