@@ -4,6 +4,7 @@
 
 TSprite::TSprite()
 {
+	x = y = 0; //Default position
 	//No animations loaded
 	bIsAnimated = false;
 	bIsAnimationLooped = false;
@@ -29,7 +30,7 @@ void TSprite::InitSprite(SDL_Renderer * targetRenderer, bool isImage, std::strin
 		{
 			ObjTexture.LoadFromFile(filePathOrText, color);
 		}
-		else
+		else //Else we are text so create text from the string and set our color and size
 		{
 			ObjTexture.LoadFromText(filePathOrText, color, txtSize);
 		}
@@ -109,9 +110,6 @@ void TSprite::InitSprAnim(int xStartPos, int yStartPos, int frameWidth, int fram
 		//Insert into the map
 		FlipbookAnim.emplace(AnimationName, newAnimData);
 
-		//Do I need to do this to clean up dangling pointers???
-		//newAnimData = NULL;
-
 	}//END IF (FlipbookAnim.count(AnimationName) == 1)
 
 }
@@ -119,6 +117,30 @@ void TSprite::InitSprAnim(int xStartPos, int yStartPos, int frameWidth, int fram
 void TSprite::SetFrame(int frame)
 {
 	currFrameCount = frame;
+}
+
+bool TSprite::SetAnimation(std::string animName, bool animPlay)
+{
+	bool success = false;
+
+	//Check to see if AnimationData exists within current flipbook
+	if (FlipbookAnim.find(animName) != FlipbookAnim.end())
+	{
+		//Set the current Animation to the referenced animation data
+		CurrentAnimation = FlipbookAnim.find(animName)->second;
+
+		//Check to see if we want to play the animation right away
+		if (animPlay)
+		{
+			//Animated is true and reset current frame to beginning
+			bIsAnimated = true;
+			currFrameCount = 0;
+		}
+		
+		success = true;
+	}
+
+	return success;
 }
 
 void TSprite::PauseAnim()
@@ -131,7 +153,47 @@ void TSprite::PlayAnim()
 	bIsAnimated = true;
 }
 
+void TSprite::FrameUpdate()
+{
+	if (bIsAnimated) //Only need to animate when we have our animation flag as true
+	{
+		//TODO work in progress
+
+
+		CurrentAnimation;
+		currFrameCount;
+	}
+
+
+
+}
+
+void TSprite::RenderSprite()
+{
+	//ObjTexture.render(x, y, );
+}
+
 Texture * TSprite::GetSpriteTexture()
 {
 	return &ObjTexture;
+}
+
+void TSprite::SetXPos(int positionX)
+{
+	x = positionX;
+}
+
+void TSprite::SetYPos(int positionY)
+{
+	y = positionY;
+}
+
+int TSprite::GetXPos()
+{
+	return x;
+}
+
+int TSprite::GetYPos()
+{
+	return y;
 }

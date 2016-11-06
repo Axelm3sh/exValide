@@ -151,18 +151,24 @@ void Texture::setAlpha(Uint8 alpha)
 
 void Texture::render(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip)
 {
-	//Set rendering space and render to screen
-	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+	//Create our destination target
+	SDL_Rect destination;
 
-	//Set clip rendering dimensions
+	//Set x and y position of our texture
+	destination.x = x;
+	destination.y = y;
+
+	//Set target rendering dimensions
 	if (clip != NULL)
 	{
-		renderQuad.w = clip->w;
-		renderQuad.h = clip->h;
+		destination.w = clip->w;
+		destination.h = clip->h;
 	}
 
 	//Render to screen, Same as RenderCopy but with EXtra angle and flip vars
-	SDL_RenderCopyEx(RenderTo, mTexture, clip, &renderQuad, angle, center, flip);
+	//clip is our section of the entire image we want to render if not NULL
+	//destination is where inside the renderer we want to display our clipped image
+	SDL_RenderCopyEx(RenderTo, mTexture, clip, &destination ,angle, center, flip);
 }
 
 int Texture::getWidth()

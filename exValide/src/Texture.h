@@ -37,15 +37,15 @@ public:
 	/*@brief: Renders texture with given variables applied.
 	@param x X-pos to shift texture
 	@param y Y-pos to shift texture
-	@param clip The Rectangle that we use to clip the image, NULL means no clip so display all of image instead of section
+	@param clip The Rectangle that we use to crop the image, leave this as NULL if you want to display the entire image
 	@param angle The degree that the image should be rotated
 	@param center The point at which image should be rotated, NULL means rotation will be applied to center of image
 	@param flip Used for flipping around the image (ie vertically, horizontally), default is no flip*/
-	void render(int x, int y, 
-				SDL_Rect* clip = NULL, 
-				double angle = 0.0,
-				SDL_Point* center = NULL, 
-				SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void render(int x, int y,
+		SDL_Rect* clip = NULL,
+		double angle = 0.0,
+		SDL_Point* center = NULL, 
+		SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	//Gets image dimensions
 	int getWidth();

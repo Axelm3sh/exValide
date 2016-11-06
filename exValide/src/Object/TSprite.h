@@ -70,9 +70,18 @@ public:
 	//May or may not need?
 	Texture* GetSpriteTexture();
 
+	void SetXPos(int positionX);
+	void SetYPos(int positionY);
+	int GetXPos();
+	int GetYPos();
+
+
 private:
 	//Actual Texture of sprite
 	Texture ObjTexture;
+
+	//Positional Data
+	int x, y;
 
 	//Sprite Bounding Box, reflects MAXIMUM size of the sprite. Used for simple Collision Checks
 	SDL_Rect SBBox;
@@ -85,7 +94,7 @@ private:
 	std::map<std::string,AnimationData*> FlipbookAnim;
 
 	bool bIsAnimated; //Is the sprite animated or not?
-	bool bIsAnimationLooped; //Is the animation looped?
+	bool bIsAnimationLooped; //Is the animation looped? //FIXME not used yet
 	int numSkins; //Number of alternate skins a sprite has //FIXME  -WIP
 	
 	SDL_Renderer* rendererPtr; //Pointer to renderer, make sure this is set by calling InitSprite
