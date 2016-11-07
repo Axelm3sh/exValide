@@ -77,11 +77,24 @@ public:
 	//May or may not need?
 	Texture* GetSpriteTexture();
 
+	//FIXME - Bounding box might reflect whole texture at first but when we use animations, MUST UPDATE WITH CLIP SIZE
+	void SetBoundingBox(int x, int y, int height, int width);
+	SDL_Rect* GetBoundingBox(); //Return Bounding Box reference
+
 	void SetXPos(int positionX);
 	void SetYPos(int positionY);
-	int GetXPos();
-	int GetYPos();
+	int GetXPos() const;
+	int GetYPos() const;
 
+	void SetRotation(double angle); //Set rotation angle in degrees
+	double GetRotation() const;
+
+	//FIXME - Either texture width and height is that of the entire texture or the clip, MUST ADD CODE TO DETERMINE THAT
+	void SetSpriteOrigin(); //Default SetSpriteOrigin Call, calculates origin based by height and width of image
+	void SetSpriteOrigin(int x, int y); //Override of SetSpriteOrigin, manually set center of sprite
+
+	void SetFlipMode(SDL_RendererFlip flag);
+	SDL_RendererFlip GetFlipMode();
 
 private:
 	//Actual Texture of sprite

@@ -14,6 +14,10 @@ TSprite::TSprite()
 	flipMode = SDL_FLIP_NONE;
 
 	numSkins = 0;//FIXME
+
+	//TSprite should be used in conjuction by inheritence, nothing used but positional render by default
+	objFlag = OBJ_FLAGS::ASSET_DATA;
+	objType = OBJ_TYPE::NONE;
 }
 
 
@@ -46,8 +50,11 @@ void TSprite::InitSprite(SDL_Renderer * targetRenderer, bool isImage, std::strin
 		}
 
 		//Update Bounding box to reflect whatever our texture is
-		SBBox.h = ObjTexture.getHeight();
-		SBBox.w = ObjTexture.getWidth();
+		SetBoundingBox(x, y, ObjTexture.getHeight(), ObjTexture.getWidth());
+
+		//Set the Sprite Origin to center of image by halving width and height of image
+		SprOrigin.y = (ObjTexture.getHeight() / 2);
+		SprOrigin.x = (ObjTexture.getWidth() / 2);
 	}
 	else
 	{
@@ -203,13 +210,26 @@ void TSprite::FrameUpdate()
 void TSprite::RenderSprite()
 {
 
-	//
+	//Finalize and copy the Sprite to the Render queue
 	ObjTexture.render(x, y, currentClipRect, rotationAngle, &SprOrigin, flipMode);
 }
 
 Texture * TSprite::GetSpriteTexture()
 {
 	return &ObjTexture;
+}
+
+void TSprite::SetBoundingBox(int xPos, int yPos, int height, int width)
+{
+	SBBox.x = xPos;
+	SBBox.y = yPos;
+	SBBox.h = height;
+	SBBox.w = width;
+}
+
+SDL_Rect* TSprite::GetBoundingBox()
+{
+	return &SBBox;
 }
 
 void TSprite::SetXPos(int positionX)
@@ -222,12 +242,38 @@ void TSprite::SetYPos(int positionY)
 	y = positionY;
 }
 
-int TSprite::GetXPos()
+int TSprite::GetXPos() const
 {
 	return x;
 }
 
-int TSprite::GetYPos()
+int TSprite::GetYPos() const
 {
 	return y;
+}
+
+void TSprite::SetRotation(double angle)
+{
+	rotationAngle = angle;
+}
+
+double TSprite::GetRotation() const
+{
+	return rotationAngle;
+}
+
+void TSprite::SetSpriteOrigin()
+{
+	SprOrigin.x = ObjTexture.getWidth() / 2;
+	SprOrigin.y = ObjTexture.getHeight() / 2;
+}
+
+void TSprite::SetFlipMode(SDL_RendererFlip flag)
+{
+	flipMode = flag;
+}
+
+SDL_RendererFlip TSprite::GetFlipMode()
+{
+	return flipMode;
 }
