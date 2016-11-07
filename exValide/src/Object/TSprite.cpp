@@ -8,7 +8,12 @@ TSprite::TSprite()
 	//No animations loaded
 	bIsAnimated = false;
 	bIsAnimationLooped = false;
-	currFrameCount = 0;
+	currentClipRect = NULL;
+	currentFrameCount = 0;
+	rotationAngle= 0.0;
+	flipMode = SDL_FLIP_NONE;
+
+	numSkins = 0;//FIXME
 }
 
 
@@ -16,6 +21,11 @@ TSprite::~TSprite()
 {
 	ObjTexture.free(); //Free texture
 	rendererPtr = NULL; //Unload renderer
+	
+	//FIXME Cleanup
+	currentClipRect = NULL; //Unload referenced data from CurrentAnimation
+	CurrentAnimation = NULL; //Unload referenced data from Flipbook
+	
 	FlipbookAnim.clear(); //Clear animation data
 }
 
@@ -71,7 +81,8 @@ void TSprite::InitSprAnim(int xStartPos, int yStartPos, int frameWidth, int fram
 		//Set sprite clips
 		for (int fIndex = 0; fIndex < maxFrames; fIndex++)
 		{
-			//Example Calculations
+			/*********************************
+			Example Calculations
 			//gSpriteClips[0].x = 0;	//xStartPos = 0; MaxIndex = 4
 			//gSpriteClips[0].y = 0;	//yStartPos = 0; Not Moving vertically (downwards)
 			//gSpriteClips[0].w = 64;	//Should be consistent
@@ -81,11 +92,7 @@ void TSprite::InitSprAnim(int xStartPos, int yStartPos, int frameWidth, int fram
 			//gSpriteClips[1].y = 0;
 			//gSpriteClips[1].w = 64;
 			//gSpriteClips[1].h = 205;
-
-			//gSpriteClips[2].x = 128;//0 + (64*2) [ie: frameWidth * index]
-			//gSpriteClips[2].y = 0;
-			//gSpriteClips[2].w = 64;
-			//gSpriteClips[2].h = 205;
+			*********************************/
 
 			//Calculate the the frames using the size of the image and divide it up horizontally or vertically
 			if (readHorizontally)
@@ -116,7 +123,7 @@ void TSprite::InitSprAnim(int xStartPos, int yStartPos, int frameWidth, int fram
 
 void TSprite::SetFrame(int frame)
 {
-	currFrameCount = frame;
+	currentFrameCount = frame;
 }
 
 bool TSprite::SetAnimation(std::string animName, bool animPlay)
@@ -132,10 +139,14 @@ bool TSprite::SetAnimation(std::string animName, bool animPlay)
 		//Check to see if we want to play the animation right away
 		if (animPlay)
 		{
-			//Animated is true and reset current frame to beginning
+			//Animated is true 
 			bIsAnimated = true;
-			currFrameCount = 0;
 		}
+
+		//and reset current frame to beginning
+		currentFrameCount = 0;
+		//Load up first frame clip data for render from currentAnimation
+		currentClipRect = &CurrentAnimation->SprFrameClips.at(currentFrameCount);
 		
 		success = true;
 	}
@@ -153,24 +164,47 @@ void TSprite::PlayAnim()
 	bIsAnimated = true;
 }
 
+//TODO - allow for non-vsync frame updates, right now it's constrained to the 60fps buffer
 void TSprite::FrameUpdate()
 {
-	if (bIsAnimated) //Only need to animate when we have our animation flag as true
+	if (bIsAnimated) //Only need to animate when we have our animation bool as true
 	{
-		//TODO work in progress
+		//Check if our current Animation is loaded
+		if (CurrentAnimation != NULL)
+		{
+			/***************************
+			Animation calculation is processed by incrementing a frameCounter, with that value divided by a frameRate
+			to get the index cell of the current clipping frame within our AnimationData. 
+			Should frameCounter reach frameRate*maxFrameRange(max animation frames) we reset frameCounter to 0;
 
+			****************************/
+			++currentFrameCount; //Increment the frame counter
 
-		CurrentAnimation;
-		currFrameCount;
-	}
+			//If we exceeded the max frame range (which is maxFrameRange * frameCycle), reset the animation
+			if (currentFrameCount >= (CurrentAnimation->maxFrameRange * CurrentAnimation->frameCycle))
+			{
+				currentFrameCount = 0;
+			}
 
+			//Access the vector of Rectangles containing clip data, uses integer division for cell access
+			currentClipRect = &CurrentAnimation->SprFrameClips.at(int(currentFrameCount / CurrentAnimation->frameCycle));
+			
+		}
+		else
+		{
+			printf("Error, Animation Failed to Update! Check to see if CurrentAnimation is loaded!");
+			currentFrameCount = 0;
+		}//END if (CurrentAnimation!=NULL)
 
+	}//END if(bIsAnimated)
 
 }
 
 void TSprite::RenderSprite()
 {
-	//ObjTexture.render(x, y, );
+
+	//
+	ObjTexture.render(x, y, currentClipRect, rotationAngle, &SprOrigin, flipMode);
 }
 
 Texture * TSprite::GetSpriteTexture()

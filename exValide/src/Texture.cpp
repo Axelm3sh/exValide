@@ -57,6 +57,9 @@ SDL_Texture * Texture::LoadTexture(std::string path, SDL_Color keyColor)
 
 bool Texture::LoadFromFile(std::string path, SDL_Color keyColor)
 {
+	//Just in case free up previous texture
+	free();
+
 	mTexture = LoadTexture(path, keyColor); //Return Texture
 
 	if (mTexture != NULL)

@@ -6,6 +6,12 @@
 #include <vector>
 #include <map>
 
+/***************************************
+class TSprite
+@brief contains positional and animation data 
+for dynamic objects that usually need
+"movement" to render most of the time
+****************************************/
 
 class TSprite :	public AObject
 {
@@ -61,7 +67,8 @@ public:
 	void PauseAnim();
 	void PlayAnim();
 
-	//Update current texture with frame
+	//Update current texture with frame, if we are animated check the current animation, and increment the frame depending on frame cycle
+	//Does not render to the renderer, it only sets up the animation data to be used when you call RenderSprite
 	void FrameUpdate();
 
 	//Wrapper for Texture::Render(), Finalize and Display Sprite on Screen
@@ -82,18 +89,24 @@ private:
 
 	//Positional Data
 	int x, y;
+	double rotationAngle;
+	SDL_Point SprOrigin;
+	SDL_RendererFlip flipMode;
 
 	//Sprite Bounding Box, reflects MAXIMUM size of the sprite. Used for simple Collision Checks
 	SDL_Rect SBBox;
 
 	//Current Animation Data
 	AnimationData* CurrentAnimation;
-	int currFrameCount; //variable for current animation frame currently being displayed, note to self zero-based counter
+
+	SDL_Rect* currentClipRect; //Used for sprite animations, leave NULL if you want to render the entire image by default
+	int currentFrameCount; //variable for current animation frame currently being displayed, note to self zero-based counter
 
 	//Holds all Animations, pointers of AnimationData
 	std::map<std::string,AnimationData*> FlipbookAnim;
 
 	bool bIsAnimated; //Is the sprite animated or not?
+
 	bool bIsAnimationLooped; //Is the animation looped? //FIXME not used yet
 	int numSkins; //Number of alternate skins a sprite has //FIXME  -WIP
 	
