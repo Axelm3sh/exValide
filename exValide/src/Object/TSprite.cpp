@@ -1,14 +1,16 @@
 #include "TSprite.h"
 
-
-
 TSprite::TSprite()
 {
-	x = y = 0; //Default position
+	worldX = worldY = 0; //Default position
 	//No animations loaded
 	bIsAnimated = false;
 	bIsAnimationLooped = false;
 	currentClipRect = NULL;
+
+	//No offset yet
+	textureXOffset = textureYOffset = 0;
+
 	currentFrameCount = 0;
 	rotationAngle= 0.0;
 	flipMode = SDL_FLIP_NONE;
@@ -39,6 +41,8 @@ void TSprite::InitSprite(SDL_Renderer * targetRenderer, bool isImage, std::strin
 
 	if(rendererPtr)
 	{
+		ObjTexture.setRenderTo(rendererPtr); //DON'T FORGET THIS, RIP 3 hours life
+
 		//If we are an image, load the image from path with color as our colorkey
 		if (isImage)
 		{
@@ -49,12 +53,11 @@ void TSprite::InitSprite(SDL_Renderer * targetRenderer, bool isImage, std::strin
 			ObjTexture.LoadFromText(filePathOrText, color, txtSize);
 		}
 
-		//Update Bounding box to reflect whatever our texture is
-		SetBoundingBox(x, y, ObjTexture.getHeight(), ObjTexture.getWidth());
+		//Calculate render offset first
+		UpdateTextureOffset();
 
-		//Set the Sprite Origin to center of image by halving width and height of image
-		SprOrigin.y = (ObjTexture.getHeight() / 2);
-		SprOrigin.x = (ObjTexture.getWidth() / 2);
+		//Update Bounding box to reflect whatever our render texture is
+		UpdateBoundingBox();
 	}
 	else
 	{
@@ -70,7 +73,7 @@ void TSprite::InitSprAnim(int xStartPos, int yStartPos, int frameWidth, int fram
 	//Check if animation is already exisiting
 	if (FlipbookAnim.count(AnimationName) == 1)
 	{
-		printf("Existing Animation \"%s\" already in Flipbook! Ignoring Initialize Animation...\n", AnimationName);
+		printf("Existing Animation \"%s\" already in Flipbook! Ignoring Initialize Animation...\n", AnimationName.c_str());
 	}
 	else 
 	{
@@ -154,6 +157,15 @@ bool TSprite::SetAnimation(std::string animName, bool animPlay)
 		currentFrameCount = 0;
 		//Load up first frame clip data for render from currentAnimation
 		currentClipRect = &CurrentAnimation->SprFrameClips.at(currentFrameCount);
+
+		if (currentClipRect)
+		{
+			//Update the texture offset using newly loaded frame
+			UpdateTextureOffset();
+			//Update Bounding box
+			UpdateBoundingBox();
+			
+		}
 		
 		success = true;
 	}
@@ -205,13 +217,20 @@ void TSprite::FrameUpdate()
 
 	}//END if(bIsAnimated)
 
+	//Update stuff
+	UpdateTextureOffset();
+	UpdateBoundingBox();
 }
 
 void TSprite::RenderSprite()
 {
+	//Set the origin of rotation in relative texture space, so instead of the top-left corner (0,0), it should be the Offset values
+	SDL_Point rotationOrigin;
+	rotationOrigin.x = abs(textureXOffset);
+	rotationOrigin.y = abs(textureYOffset);
 
 	//Finalize and copy the Sprite to the Render queue
-	ObjTexture.render(x, y, currentClipRect, rotationAngle, &SprOrigin, flipMode);
+	ObjTexture.render((worldX-textureXOffset), (worldY-textureYOffset), currentClipRect, rotationAngle, &rotationOrigin, flipMode);
 }
 
 Texture * TSprite::GetSpriteTexture()
@@ -219,37 +238,68 @@ Texture * TSprite::GetSpriteTexture()
 	return &ObjTexture;
 }
 
-void TSprite::SetBoundingBox(int xPos, int yPos, int height, int width)
-{
-	SBBox.x = xPos;
-	SBBox.y = yPos;
-	SBBox.h = height;
-	SBBox.w = width;
-}
-
 SDL_Rect* TSprite::GetBoundingBox()
 {
 	return &SBBox;
 }
 
+void TSprite::UpdateBoundingBox()
+{
+	//Calculate worldSpace Position
+	SBBox.x = (worldX - textureXOffset);
+	SBBox.y = (worldY - textureYOffset);
+
+	if (bIsAnimated) //use clip rects
+	{
+		SBBox.h = currentClipRect->h;
+		SBBox.w = currentClipRect->w;
+	}
+	else //No animation, thus calculate by texture width and height?
+	{
+		SBBox.h = GetSpriteTexture()->getHeight();
+		SBBox.w = GetSpriteTexture()->getWidth();
+	}
+}
+
+void TSprite::UpdateTextureOffset()
+{
+	if (bIsAnimated)
+	{
+		if (currentClipRect)
+		{
+			textureXOffset = currentClipRect->w / 2;
+			textureYOffset = currentClipRect->h / 2;
+		}
+		else
+		{
+			printf("Error: UpdatingtextureOffset Failed with currentClipRect");
+		}
+	}
+	else //Use actual texture height and width
+	{
+		textureXOffset = GetSpriteTexture()->getWidth() / 2;
+		textureYOffset = GetSpriteTexture()->getHeight() / 2;
+	}
+}
+
 void TSprite::SetXPos(int positionX)
 {
-	x = positionX;
+	worldX = positionX;
 }
 
 void TSprite::SetYPos(int positionY)
 {
-	y = positionY;
+	worldY = positionY;
 }
 
 int TSprite::GetXPos() const
 {
-	return x;
+	return worldX;
 }
 
 int TSprite::GetYPos() const
 {
-	return y;
+	return worldY;
 }
 
 void TSprite::SetRotation(double angle)
@@ -260,12 +310,6 @@ void TSprite::SetRotation(double angle)
 double TSprite::GetRotation() const
 {
 	return rotationAngle;
-}
-
-void TSprite::SetSpriteOrigin()
-{
-	SprOrigin.x = ObjTexture.getWidth() / 2;
-	SprOrigin.y = ObjTexture.getHeight() / 2;
 }
 
 void TSprite::SetFlipMode(SDL_RendererFlip flag)

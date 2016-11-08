@@ -5,8 +5,6 @@
 Engine::Engine()
 {
 	bEngineIsPaused = bEngineIsRunning = false;
-
-	x = y = 0;
 }
 
 
@@ -25,6 +23,11 @@ void Engine::Run(int w, int h, bool vsync)
 
 	worldTime.Start();
 
+	//Three-step rule for loading sprites, Load image, Initialize anim, SET ANIMATION
+	sprite.InitSprite(RenderFramework.getRenderer(), true, fileManager.findFileByNameTag("PlayerSS"), CMagenta);
+	sprite.InitSprAnim(0, 0, 36, 36, 11, 30);
+	sprite.SetAnimation("Anim_Default", true);
+
 	while (bEngineIsRunning) //While the engine is running
 	{
 		while (InputHandler.ProcessEvent() != 0) //while we have input events on queue
@@ -39,23 +42,24 @@ void Engine::Run(int w, int h, bool vsync)
 				Quit();
 			}
 
-				
-			if (InputHandler.isKeyPressed(SDLK_UP) && (y < engineScreenHeight) )
+			//Vertical Movement
+			if (InputHandler.isKeyPressed(SDLK_UP) && (sprite.GetYPos() > 0) )
 			{
-				--y;
+				sprite.SetYPos(sprite.GetYPos() - 1);
 			}
-			else if (InputHandler.isKeyPressed(SDLK_DOWN) && (y >= 0))
+			else if (InputHandler.isKeyPressed(SDLK_DOWN) && (sprite.GetYPos() < engineScreenHeight))
 			{
-				++y;
+				sprite.SetYPos(sprite.GetYPos() + 1);
 			}
 			
-			if (InputHandler.isKeyPressed(SDLK_RIGHT) && (x < engineScreenWidth) )
+			//Horizontalmovement
+			if (InputHandler.isKeyPressed(SDLK_RIGHT) && (sprite.GetXPos() < engineScreenWidth) )
 			{
-				++x;
+				sprite.SetXPos(sprite.GetXPos() + 1);
 			}
-			else if (InputHandler.isKeyPressed(SDLK_LEFT) && (x >= 0) )
+			else if (InputHandler.isKeyPressed(SDLK_LEFT) && (sprite.GetXPos() > 0) )
 			{
-				--x;
+				sprite.SetXPos(sprite.GetXPos() - 1);
 			}
 			
 
@@ -86,12 +90,16 @@ void Engine::Step()
 	//TEST
 	RenderFramework.Clear();
 
-	////printf("Time %f, Sinx %f\n", worldTime.GetTime(), (100 + sin(worldTime.GetTime()) * 20) );
-	printf("x %d, y %d, w %d, h %d\n", x, y, x+30, y+30 );
-	SDL_Rect Rect = { (x + (int)floor(sin(worldTime.GetTime()) * 60)), y, (30 + (int) floor( sin(worldTime.GetTime())*30 ) ), 30 };
+	printf("x %d, y %d, w %d, h %d\n", sprite.GetXPos(), sprite.GetYPos(), sprite.GetBoundingBox()->w,  sprite.GetBoundingBox()->h);
 	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), 0, 255, 25, 150); //Set color for rect, overrides background window color
-	SDL_RenderFillRect(RenderFramework.getRenderer(), &Rect); 
-	
+	SDL_RenderDrawRect(RenderFramework.getRenderer(), sprite.GetBoundingBox()); 
+
+	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), CCyan.r, CCyan.g, CCyan.b, 255); //Set color for rect, overrides background window color
+	SDL_RenderDrawPoint(RenderFramework.getRenderer(), sprite.GetXPos(), sprite.GetYPos());
+
+	sprite.FrameUpdate();
+	sprite.RenderSprite();
+
 	//Rerender
 	RenderFramework.Refresh();
 

@@ -77,9 +77,13 @@ public:
 	//May or may not need?
 	Texture* GetSpriteTexture();
 
-	//FIXME - Bounding box might reflect whole texture at first but when we use animations, MUST UPDATE WITH CLIP SIZE
-	void SetBoundingBox(int x, int y, int height, int width);
+	//Calculates the texture offset, usually called before Bounding box update
+	void UpdateTextureOffset();
+
 	SDL_Rect* GetBoundingBox(); //Return Bounding Box reference
+	void UpdateBoundingBox(); //Update bounding box based on x and y position and given offset
+
+	
 
 	void SetXPos(int positionX);
 	void SetYPos(int positionY);
@@ -89,10 +93,6 @@ public:
 	void SetRotation(double angle); //Set rotation angle in degrees
 	double GetRotation() const;
 
-	//FIXME - Either texture width and height is that of the entire texture or the clip, MUST ADD CODE TO DETERMINE THAT
-	void SetSpriteOrigin(); //Default SetSpriteOrigin Call, calculates origin based by height and width of image
-	void SetSpriteOrigin(int x, int y); //Override of SetSpriteOrigin, manually set center of sprite
-
 	void SetFlipMode(SDL_RendererFlip flag);
 	SDL_RendererFlip GetFlipMode();
 
@@ -100,14 +100,21 @@ private:
 	//Actual Texture of sprite
 	Texture ObjTexture;
 
-	//Positional Data
-	int x, y;
-	double rotationAngle;
-	SDL_Point SprOrigin;
-	SDL_RendererFlip flipMode;
-
-	//Sprite Bounding Box, reflects MAXIMUM size of the sprite. Used for simple Collision Checks
+	//Sprite Bounding Box, reflects MAXIMUM size of the sprite. Used for simple Collision Checks, maybe use this for origin calculations
 	SDL_Rect SBBox;
+
+	//Positional Data
+	int worldX, worldY; //World Position in WorldSpace, the center of our sprite, local Origin
+	
+	//Offset used for rendering, worldSpace minus half length of H and W of texture to move texture up-left
+	int textureXOffset;	
+	int textureYOffset;
+
+	//Rotational Angle in degrees
+	double rotationAngle;	
+
+	//SDL_Flip
+	SDL_RendererFlip flipMode;
 
 	//Current Animation Data
 	AnimationData* CurrentAnimation;

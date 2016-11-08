@@ -7,6 +7,7 @@
 #include "FileManager.h"
 #include "Texture.h"
 #include "InputManager.h"
+#include "../src/Object/TSprite.h"
 
 class Engine
 {
@@ -51,7 +52,7 @@ private:
 	FileManager fileManager;
 
 	//DEBUG
-	int x, y;
+	TSprite sprite;
 
 };
 

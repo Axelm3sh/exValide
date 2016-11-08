@@ -7,15 +7,15 @@ int main(int argc, char **argv)
 {
 	cout << "Hello World!";
 
-	FileManager jsonManage;
+	//FileManager jsonManage;
 
-	jsonManage.DebugWriteJsonObj();
-	
-	char te;
-	cin >> te;
+	//jsonManage.DebugWriteJsonObj();
+	//
+	//char te;
+	//cin >> te;
 
-	//Engine Game;
-	//Game.Run();
+	Engine Game;
+	Game.Run();
 
 	//InputManager testInput;
 
@@ -51,6 +51,6 @@ int main(int argc, char **argv)
 	//Game.Quit();
 
 
-	return 0; //Test main should have ran for 6 seconds total
+	return 0; 
 }
 

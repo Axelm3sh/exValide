@@ -196,6 +196,7 @@ string FileManager::findFileByNameTag(string tag)
 	else
 	{
 		//Not found :<
+		printf("Resource tag %s not found", tag.c_str());
 		foundString = "";
 	}
 	return foundString;
