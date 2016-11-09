@@ -16,7 +16,7 @@ int InputManager::ProcessEvent()
 	//If there is an event, dequeue and put into &event
 	int returnCode = SDL_PollEvent(&event);
 
-	if (returnCode != 0)
+	if (returnCode != 0 && event.key.repeat == 0) //Event in queue and not a repeat keyboard input
 	{
 		switch (event.type)
 		{
