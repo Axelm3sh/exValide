@@ -7,8 +7,14 @@ class Timer
 {
 private:
 
+	//For chrono timer
 	float fStartTime; //clock time when timer started
 	float fPausedTime; //Stored Time at when timer was paused
+
+	//for delta time
+	float elapsedTickTime;
+	float lastTickTime;
+	float currTickTime;
 
 	bool bIsStarted;
 	bool bIsPaused;
@@ -25,7 +31,9 @@ public:
 	//Get the current clock time the timer is at
 	float GetTime();
 
-	//float GetDelta(); //FIXME - get delta time some other way? maybe in engine
+	//Update
+	void Tick();
+	float GetDelta();
 
 };
 

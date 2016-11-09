@@ -4,6 +4,9 @@ Timer::Timer()
 {
 	fStartTime = 0.0f;
 	fPausedTime = 0.0f;
+	
+	currTickTime = 0.0f;
+	lastTickTime = 0.0f;
 
 	bIsPaused = false;
 	bIsStarted = false;
@@ -104,4 +107,17 @@ float Timer::GetTime()
 	}
 
 	return time;
+}
+
+void Timer::Tick()
+{
+	currTickTime = SDL_GetTicks() / 1000.0f;
+
+	elapsedTickTime = currTickTime - lastTickTime;
+	lastTickTime = currTickTime;
+}
+
+float Timer::GetDelta()
+{
+	return elapsedTickTime;
 }

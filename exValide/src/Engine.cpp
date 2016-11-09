@@ -69,8 +69,6 @@ void Engine::Run(int w, int h, bool vsync)
 		Step();
 		UpdateFrame(); 
 	}
-
-
 }
 
 void Engine::Pause()
@@ -83,6 +81,7 @@ void Engine::Unpause()
 
 void Engine::Step()
 {
+	worldTime.Tick();
 	//Every step should go through a list of actors, npcs, and enemies and update their new values by calling their tick function
 
 
@@ -99,6 +98,11 @@ void Engine::Step()
 
 	sprite.FrameUpdate();
 	sprite.RenderSprite();
+
+	std::string timeDisp;
+	timeDisp = "Delta Time: " + to_string(worldTime.GetDelta()) + "/t";
+	printf(timeDisp.c_str());
+
 
 	//Rerender
 	RenderFramework.Refresh();

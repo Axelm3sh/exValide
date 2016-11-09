@@ -51,7 +51,7 @@ private:
 
 	FileManager fileManager;
 
-	//DEBUG
+	//DEBUG STUFF
 	TSprite sprite;
 
 };
