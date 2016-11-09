@@ -13,7 +13,7 @@ for dynamic objects that usually need
 "movement" to render most of the time
 ****************************************/
 
-class TSprite :	public AObject
+class TSprite
 {
 public:
 	TSprite();

@@ -17,9 +17,6 @@ TSprite::TSprite()
 
 	numSkins = 0;//FIXME
 
-	//TSprite should be used in conjuction by inheritence, nothing used but positional render by default
-	objFlag = OBJ_FLAGS::ASSET_DATA;
-	objType = OBJ_TYPE::NONE;
 }
 
 

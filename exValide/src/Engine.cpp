@@ -28,6 +28,9 @@ void Engine::Run(int w, int h, bool vsync)
 	sprite.InitSprAnim(0, 0, 36, 36, 11, 30);
 	sprite.SetAnimation("Anim_Default", true);
 
+	//DEBUG
+	double speed = 600.0;
+
 	while (bEngineIsRunning) //While the engine is running
 	{
 		while (InputHandler.ProcessEvent() != 0) //while we have input events on queue
@@ -45,21 +48,38 @@ void Engine::Run(int w, int h, bool vsync)
 			//Vertical Movement
 			if (InputHandler.isKeyPressed(SDLK_UP) && (sprite.GetYPos() > 0) )
 			{
-				sprite.SetYPos(sprite.GetYPos() - 1);
+				sprite.SetYPos(sprite.GetYPos() - (speed * worldTime.GetDelta()));
+				if (sprite.GetYPos() < 0)
+				{
+					sprite.SetYPos(0);
+				}
+
 			}
 			else if (InputHandler.isKeyPressed(SDLK_DOWN) && (sprite.GetYPos() < engineScreenHeight))
 			{
-				sprite.SetYPos(sprite.GetYPos() + 1);
+				sprite.SetYPos(sprite.GetYPos() + (speed * worldTime.GetDelta()));
+				if (sprite.GetYPos() > engineScreenHeight)
+				{
+					sprite.SetYPos(engineScreenHeight);
+				}
 			}
 			
 			//Horizontalmovement
 			if (InputHandler.isKeyPressed(SDLK_RIGHT) && (sprite.GetXPos() < engineScreenWidth) )
 			{
-				sprite.SetXPos(sprite.GetXPos() + 1);
+				sprite.SetXPos(sprite.GetXPos() + (speed * worldTime.GetDelta()));
+				if (sprite.GetXPos() > engineScreenWidth)
+				{
+					sprite.SetXPos(engineScreenWidth);
+				}
 			}
 			else if (InputHandler.isKeyPressed(SDLK_LEFT) && (sprite.GetXPos() > 0) )
 			{
-				sprite.SetXPos(sprite.GetXPos() - 1);
+				sprite.SetXPos(sprite.GetXPos() - (speed * worldTime.GetDelta()));
+				if (sprite.GetXPos() < 0)
+				{
+					sprite.SetXPos(0);
+				}
 			}
 			
 
