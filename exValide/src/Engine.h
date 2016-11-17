@@ -1,7 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "GDefinitions.h"
+#include "GDefinitions.hpp"
 #include "Timer.h"
 #include "Framework.h"
 #include "FileManager.h"

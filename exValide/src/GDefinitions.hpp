@@ -56,5 +56,20 @@ enum OBJ_TYPE
 	WORLD_EFFECTS	//MAYBE FOR EFFECTS/PARTICLES??
 };
 
+//Math stuff
+struct Vector2
+{
+	float x;
+	float y;
+};
+
+struct Vector3
+{
+	float x;
+	float y;
+	float z;
+};
+
+
 
 #endif /*END GLOBALDEF_H */

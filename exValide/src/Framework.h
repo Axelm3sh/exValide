@@ -2,7 +2,7 @@
 #define FRAMEWORK_H
 
 #include <iostream>
-#include "GDefinitions.h"
+#include "GDefinitions.hpp"
 
 /*This class should act as a container that holds multiple classes. 
 	This really should only hold the window to render things on and/or call Update.

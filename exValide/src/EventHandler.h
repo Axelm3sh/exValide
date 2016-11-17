@@ -1,7 +1,7 @@
 #ifndef EVENTHANDLER_H
 #define EVENTHANDLER_H
 
-#include "GDefinitions.h"
+#include "GDefinitions.hpp"
 #include <map>
 #include <list>
 

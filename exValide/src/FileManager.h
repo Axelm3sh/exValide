@@ -4,7 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include "GDefinitions.h"
+#include "GDefinitions.hpp"
 #include "../json/json.hpp"
 
 using namespace std;

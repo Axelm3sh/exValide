@@ -1,7 +1,7 @@
 #ifndef AObject_H
 #define AObject_H
 
-#include "../GDefinitions.h"
+#include "../GDefinitions.hpp"
 
 class AObject
 {
