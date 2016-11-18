@@ -56,13 +56,62 @@ enum OBJ_TYPE
 	WORLD_EFFECTS	//MAYBE FOR EFFECTS/PARTICLES??
 };
 
-//Math stuff
-struct Vector2
+//2D Vector
+class Vector2
 {
+public:
+	//Constructor
+	inline Vector2() { x = 0; y = 0; };
+	//Destructor
+	inline ~Vector2() { };
+
+	//Non-Default constructor
+	inline Vector2(float xVal, float yVal) { x = xVal, y = yVal; };
+
+	//Overload Add vector 2d
+	inline Vector2 operator+(Vector2 vec2) { return Vector2(x + vec2.x, y + vec2.y); };
+
+	//Overload Subtract vector 2d
+	inline Vector2 operator-(Vector2 vec2) { return Vector2(x - vec2.x, y - vec2.y); };
+
+	//Overload Multiply vector2d
+	inline Vector2 operator*(Vector2 vec2) { return Vector2(x * vec2.x, y * vec2.y); };
+
+	//Overload Divide vector2d
+	inline Vector2 operator/(Vector2 vec2) { return Vector2(x / vec2.x, y / vec2.y); };
+
+	//Overload Multiply scalar
+	inline Vector2 operator*(float scalar) { return Vector2(x * scalar, y * scalar); };
+
+	//Overload Divide scalar
+	inline Vector2 operator/(float scalar) { return Vector2(x / scalar, y / scalar); };
+
+	//Return dot product of this vector and another vector
+	inline float dot(Vector2 vec2) { return (x * vec2.x ) + (y * vec2.y); };
+
+	//Return cross product of this vector and another vector
+	inline float dot(Vector2 vec2) { return (x * vec2.x) - (y * vec2.y); };
+
+	//Cross product 3d case
+	//inline Vector3 cross(Vector3 vec3) {return Vector3(y * vec3.z – z * vec3.y, z * vec3.x – x* vec3.z, x* vec3.y – y*vec3.x); };
+
+	//Length of the vector
+	inline float length() { return sqrt(x*x + y*y);  };
+
+	//Square of the Length of vector, useful for 
+	inline float squaredLength() { return sqrt(x*x + y*y); };
+
+	//normalize***
+	//inline float unit() { return (this / this->length()); };
+
+
+
 	float x;
 	float y;
 };
 
+//Unused for now
+//3D Vector
 struct Vector3
 {
 	float x;
