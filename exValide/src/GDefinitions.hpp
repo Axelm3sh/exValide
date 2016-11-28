@@ -90,7 +90,7 @@ public:
 	inline float dot(Vector2 vec2) { return (x * vec2.x ) + (y * vec2.y); };
 
 	//Return cross product of this vector and another vector
-	inline float dot(Vector2 vec2) { return (x * vec2.x) - (y * vec2.y); };
+	inline float cross(Vector2 vec2) { return (x * vec2.x) - (y * vec2.y); };
 
 	//Cross product 3d case
 	//inline Vector3 cross(Vector3 vec3) {return Vector3(y * vec3.z – z * vec3.y, z * vec3.x – x* vec3.z, x* vec3.y – y*vec3.x); };
