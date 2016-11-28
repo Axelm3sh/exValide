@@ -2,6 +2,7 @@
 #define EVENTHANDLER_H
 
 #include "GDefinitions.hpp"
+#include <functional>
 #include <map>
 #include <list>
 
@@ -13,7 +14,7 @@ public:
 	EventHandler();
 	~EventHandler();
 
-
+	
 
 
 };
