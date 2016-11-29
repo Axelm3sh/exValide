@@ -7,15 +7,18 @@ int main(int argc, char **argv)
 {
 	cout << "Hello World!";
 
-	//FileManager jsonManage;
+	FileManager jsonManage;
 
-	//jsonManage.DebugWriteJsonObj();
-	//
-	//char te;
-	//cin >> te;
+	jsonManage.DebugParseTypeCheck(jsonManage.Object);
 
-	Engine Game;
-	Game.Run();
+	jsonManage.QuickWrite(jsonManage.Object, "Player01_Anim_Test.json");
+	jsonManage.QuickWrite(jsonManage.Resource, "Test_Resource.json");
+	
+	char te;
+	cin >> te;
+
+	//Engine Game;
+	//Game.Run();
 
 	//InputManager testInput;
 

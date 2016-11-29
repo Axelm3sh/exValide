@@ -109,6 +109,9 @@ void Engine::Step()
 	//TEST
 	RenderFramework.Clear();
 
+	sprite.FrameUpdate();
+	sprite.RenderSprite();
+
 	printf("x %d, y %d, w %d, h %d\n", sprite.GetXPos(), sprite.GetYPos(), sprite.GetBoundingBox()->w,  sprite.GetBoundingBox()->h);
 	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), 0, 255, 25, 150); //Set color for rect, overrides background window color
 	SDL_RenderDrawRect(RenderFramework.getRenderer(), sprite.GetBoundingBox()); 
@@ -116,8 +119,6 @@ void Engine::Step()
 	SDL_SetRenderDrawColor(RenderFramework.getRenderer(), CCyan.r, CCyan.g, CCyan.b, 255); //Set color for rect, overrides background window color
 	SDL_RenderDrawPoint(RenderFramework.getRenderer(), sprite.GetXPos(), sprite.GetYPos());
 
-	sprite.FrameUpdate();
-	sprite.RenderSprite();
 
 	std::string timeDisp;
 	timeDisp = "Delta Time: " + to_string(worldTime.GetDelta()) + "/t";

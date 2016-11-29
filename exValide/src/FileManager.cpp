@@ -76,74 +76,10 @@ void FileManager::BeginParse()
 	parseFile.close();
 }
 
-void FileManager::DebugWriteJsonObj()
+void FileManager::DebugParseTypeCheck(json object)
 {
-	string pathToRes = "res/";
-	fstream ioStream;
-
-	cout << "creating json Obj\n";
-	json jObject = 
-	{
-		{ "pi", 3.141 },
-		{ "happy", true },
-		{ "name", "Niels" },
-		{ "nothing", nullptr }, //null object by passing nullptr
-		{ "answer",
-			{
-				{ "everything", 42 } //Object inside object
-			} 
-		},
-		{ "list", { 1, 0, 2 } }, //Array stored as vector (using initializer list)
-		{ "object",
-			{	
-				{ "currency", "USD" },	//another object (using initializer list of pairs)
-				{ "value", 42.99 }	
-			} 
-		}
-	};
-
-	cout << setw(4) << jObject << endl; //Prettify the output of the entire object
-
-	cout << "Writing to res folder \"myJson.json\"\n\n";
-
-	ioStream.open("res/myJson.json", ios::out | ios::binary);
-	if (ioStream.is_open())
-	{
-		cout << "Successful Write!\n";
-		ioStream << jObject;
-	}
-	else
-	{
-		cout << "Unsuccessful Write!\n";
-	}
-	ioStream.close();
-
-	cout << "Creating new json object, j2\n Opening Stream\n\n";
-	json j2;
-
-	cout << "Press \'x\' to Jason\n";
-	string lol;
-	cin >> lol;
-
-	ioStream.open("res/myJson.json", ios::in | ios::binary);
-	if (ioStream.is_open())
-	{
-		cout << "Success!\nNow Attempting to read Json...";
-		ioStream >> j2;
-	}
-	else
-	{
-		cout << "Failed!";
-	}
-	ioStream.close();
-
-	cout << j2 << endl;
-
-	cout << "Press \'x\' to Jason\n\n";
-	cin >> lol;
-	
 	// special iterator member functions for objects
-	for (json::iterator it = j2.begin(); it != j2.end(); ++it) 
+	for (json::iterator it = object.begin(); it != object.end(); ++it)
 	{
 		std::cout << it.key() << " : " << it.value();
 		if (it.value().is_primitive())
@@ -176,11 +112,59 @@ void FileManager::DebugWriteJsonObj()
 			else if (it.value().is_array())
 			{
 				cout << " is an ARRAY!";
+				for (json::iterator it2 = it.value().begin(); it2 != it.value().end(); it2++)
+				{
+					DebugParseTypeCheck(it2.value());
+				}
 			}
 		}
-
+		
 		cout << endl;
 	}
+}
+
+
+void FileManager::QuickWrite(json obj, string path)
+{
+	fstream iostream;
+	
+	path.insert(0, "res/");
+
+	iostream.open(path, ios::out | ios::binary);
+	if (iostream.is_open())
+	{
+		cout << "Success!\nNow Attempting to write Json...";
+		iostream << obj;
+	}
+	else
+	{
+		cout << "Unsuccessful QuickWrite\n";
+	}
+	iostream.close();
+
+}
+
+json FileManager::QuickRead(string path)
+{
+	json j2;
+	fstream ioStream;
+
+	path.insert(0, "res/");
+
+	ioStream.open(path, ios::in | ios::binary);
+	if (ioStream.is_open())
+	{
+		cout << "Success!\nNow Attempting to read Json...";
+		ioStream >> j2;
+	}
+	else
+	{
+		cout << "Failed QuickRead! ";
+		cout << path << endl;
+	}
+	ioStream.close();
+
+	return j2;
 }
 
 string FileManager::findFileByNameTag(string tag)

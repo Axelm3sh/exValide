@@ -1,0 +1,1 @@
+{"Animation":[{"animName":"Anim_Default_Name_Obj","cycleDelay":6,"file":"Players_SpriteSheet.png","frameH":36,"frameNum":2,"frameW":36,"readHorizontally":true,"x":0,"y":0}]}
