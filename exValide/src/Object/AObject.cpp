@@ -35,3 +35,16 @@ void AObject::SetType(OBJ_TYPE type)
 {
 	objType = type;
 }
+
+void AObject::addTag(std::string tag)
+{
+	//convert lowercase?
+	objectTags.push_back(tag);
+}
+
+bool AObject::getTag(std::string tag)
+{
+
+	//Todo search through tags, iterate
+	return false;
+}
