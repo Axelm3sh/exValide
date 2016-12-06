@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\FileDat\ResourceObject.cpp" />
     <ClCompile Include="src\Object\APlayer.cpp" />
     <ClCompile Include="src\Object\AObject.cpp" />
     <ClCompile Include="src\EventHandler.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="src\Object\TSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\FileDat\ResourceObject.h" />
     <ClInclude Include="src\Object\APlayer.h" />
     <ClInclude Include="json\json.hpp" />
     <ClInclude Include="src\Object\AObject.h" />

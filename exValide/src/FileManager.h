@@ -4,12 +4,10 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include "GDefinitions.hpp"
-#include "../json/json.hpp"
+#include "./FileDat/ResourceObject.h"
 
 using namespace std;
 // for convenience
-using json = nlohmann::json;
 
 /*Class File Manager
 	@brief: Purpose is to manage files in the resources folder through an external file
@@ -25,14 +23,6 @@ class FileManager
 public:
 	FileManager();
 	~FileManager();
-
-	//enum RES_TYPE //Can we map strings to enums?
-	//{
-	//	ALIAS,
-	//	OBJECT,
-	//	ANIMATION
-	//	//Todo, extend for more Resource types
-	//};
 
 	void BeginParse();
 	void MapDefaultResources();

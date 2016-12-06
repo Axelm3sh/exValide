@@ -11,8 +11,9 @@ int main(int argc, char **argv)
 
 	jsonManage.DebugParseTypeCheck(jsonManage.Object);
 
-	jsonManage.QuickWrite(jsonManage.Object, "Player01_Anim_Test.json");
-	jsonManage.QuickWrite(jsonManage.Resource, "Test_Resource.json");
+	jsonManage.QuickWrite(jsonManage.Object, "Player01_Anim_Test.resource");
+	jsonManage.QuickRead("Player01_Anim_Test.resource");
+	jsonManage.QuickWrite(jsonManage.Resource, "Test_Resource.resource");
 	
 	char te;
 	cin >> te;
