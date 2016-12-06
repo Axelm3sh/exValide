@@ -25,7 +25,8 @@ public:
 	void SetType(OBJ_TYPE type);
 
 	void addTag(std::string tag);
-	bool getTag(std::string tag);
+	bool objectHasTag(std::string tag);
+	void clearTags();
 
 	inline OBJ_FLAGS GetFlag() { return objFlag; };
 	inline OBJ_TYPE GetType() { return objType; };

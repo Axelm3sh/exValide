@@ -42,9 +42,23 @@ void AObject::addTag(std::string tag)
 	objectTags.push_back(tag);
 }
 
-bool AObject::getTag(std::string tag)
+bool AObject::objectHasTag(std::string tag)
 {
-
+	bool foundTag = false;
+	std::vector<std::string>::iterator it;
 	//Todo search through tags, iterate
-	return false;
+	for (it = objectTags.begin(); it != objectTags.end(); it++)
+	{
+		if (*it == tag)
+		{
+			foundTag = true;
+		}
+	}
+
+	return foundTag;
+}
+
+void AObject::clearTags()
+{
+	objectTags.clear();
 }

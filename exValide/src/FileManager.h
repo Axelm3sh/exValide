@@ -26,9 +26,16 @@ public:
 	FileManager();
 	~FileManager();
 
-	void BeginParse();
-	void BeginParseResourceFile();
+	//enum RES_TYPE //Can we map strings to enums?
+	//{
+	//	ALIAS,
+	//	OBJECT,
+	//	ANIMATION
+	//	//Todo, extend for more Resource types
+	//};
 
+	void BeginParse();
+	void MapDefaultResources();
 
 	void DebugParseTypeCheck(json object);
 

@@ -17,8 +17,8 @@ int main(int argc, char **argv)
 	char te;
 	cin >> te;
 
-	//Engine Game;
-	//Game.Run();
+	Engine Game;
+	Game.Run();
 
 	//InputManager testInput;
 

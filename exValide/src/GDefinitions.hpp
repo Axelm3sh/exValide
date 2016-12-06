@@ -33,7 +33,8 @@ const SDL_Color CTransparent{ 0,0,0,0 }; //Transparent
 //End Colors
 
 //Resources file used for FileManager
-const std::string RESOURCE_FILE_PATH = "res/resources.txt";
+//const std::string RESOURCE_FILE_PATH = "res/resources.txt";
+const std::string RESOURCE_FILE_PATH = "res/resources.json";
 
 //Used for determining Engine interactions 
 enum OBJ_FLAGS

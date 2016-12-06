@@ -76,6 +76,19 @@ void FileManager::BeginParse()
 	parseFile.close();
 }
 
+void FileManager::MapDefaultResources()
+{
+	fstream parseFile;
+	string tag = "";
+	string path = "";
+	json defaultResourceJson;
+
+	parseFile.open(RESOURCE_FILE_PATH);
+
+
+
+}
+
 void FileManager::DebugParseTypeCheck(json object)
 {
 	// special iterator member functions for objects
