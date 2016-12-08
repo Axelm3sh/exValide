@@ -42,7 +42,10 @@ public:
 	~ResourceObject();
 
 	void Serialize(map<string, string> mMap); //to-string json via map
-	json Deserialize(); //from-string json
+	void Serialize(AnimationObject animObj);
+	void Serialize(PathObject pathObj);
+
+	void Deserialize(); //from-string json
 	
 private:
 	RESOURCE_TYPE resourceType;
